@@ -9,9 +9,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="@if (Auth::user()->images != null)
-                  ./uploads/{{ Auth::user()->images}}
-                @endif" alt="..." class="img-circle profile_img">
+                <img src="" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Xin chào,</span>
@@ -71,9 +69,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="@if (Auth::user()->images != null)
-                      ./uploads/{{ Auth::user()->images}}
-                    @endif" alt="">{{Auth::user()->name}}
+                    <img src="" alt="">{{Auth::user()->name}}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

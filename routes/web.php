@@ -116,7 +116,7 @@ Route::group(['prefix' => '/admin'], function() {
 		]);
 	 Route::post('/login-admin', ['as' => 'loginAdmin', 'uses' => 'UserController@postLoginAdmin']);
 	 
-   Route::get('/', [
+   Route::get('', [
 		'uses'=>'AdminController@getIndex',
 		'as'=>'admin.index',
 		]);
