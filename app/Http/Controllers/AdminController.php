@@ -26,7 +26,7 @@ class AdminController extends Controller
 				$idUsers = DB::table('users')->join('role_user', 'users.id', '=', 'role_user.user_id')
 				->select('users.id')
 				->where('role_user.role_id','!=',$role_manager->id)
-				->groupBy('id')
+				->groupBy('users.id')
 				->get();
 				$id= json_decode( json_encode($idUsers), true);
 				$users = DB::table('users')->whereIn('id', $id)

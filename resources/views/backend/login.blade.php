@@ -3,7 +3,7 @@
 <head>
 	<title>Login Page</title>
    <!--Made with love by Mutiullah Samim -->
-   <base href="{{secure_asset('')}}">
+   <base href="{{asset('')}}">
 	<!--Bootsrap 4 CDN-->
 	<link rel="stylesheet" href="public/text/bootstrap.min.css" >
     
