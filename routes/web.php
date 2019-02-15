@@ -96,7 +96,7 @@ Route::group(['prefix' => 'trac-nghiem'], function() {
 		'as'=>'home.getQuizz',
 		]);
 });
-Route::get('/admin', [
+Route::get('/admin/home', [
 		'uses'=>'AdminController@getIndex',
 		'as'=>'admin.index',
 		]);
