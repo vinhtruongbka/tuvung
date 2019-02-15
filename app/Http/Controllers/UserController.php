@@ -24,9 +24,9 @@ class UserController extends Controller
 	public function getRegisration(){
         $address = Address::first();   
         $news = News::all();
-        $sidebars = Sidebar::where('Status', 0)->get();
-        $categorys = Category::where('Status', 0)->get();
-        $categorys_2 = Category::where('Status', 1)->get();
+        $sidebars = Sidebar::where('status', 0)->get();
+        $categorys = Category::where('status', 0)->get();
+        $categorys_2 = Category::where('status', 1)->get();
         $menus = Category::where('idSidebar', 6)->get();
         return view('page.registration',compact('news','sidebars','categorys','categorys_2','menus','address'));
     }
@@ -34,9 +34,9 @@ class UserController extends Controller
     public function getLogin(){
         $address = Address::first();   
         $news = News::all();
-        $sidebars = Sidebar::where('Status', 0)->get();
-        $categorys = Category::where('Status', 0)->get();
-        $categorys_2 = Category::where('Status', 1)->get();
+        $sidebars = Sidebar::where('status', 0)->get();
+        $categorys = Category::where('status', 0)->get();
+        $categorys_2 = Category::where('status', 1)->get();
         $menus = Category::where('idSidebar', 6)->get();
         return view('page.login',compact('news','sidebars','categorys','categorys_2','menus','address'));
     }
@@ -134,9 +134,9 @@ class UserController extends Controller
     public function getMoney(Request $request) {
         $address = Address::first();   
         $news = News::all();
-        $sidebars = Sidebar::where('Status', 0)->get();
-        $categorys = Category::where('Status', 0)->get();
-        $categorys_2 = Category::where('Status', 1)->get();
+        $sidebars = Sidebar::where('status', 0)->get();
+        $categorys = Category::where('status', 0)->get();
+        $categorys_2 = Category::where('status', 1)->get();
         $menus = Category::where('idSidebar', 6)->get();
         return view('page.money',compact('news','sidebars','categorys','categorys_2','menus','address'));
     }
@@ -144,9 +144,9 @@ class UserController extends Controller
     public function getExtension($slug,Request $request) {
         $address = Address::first();   
         $news = News::all();
-        $sidebars = Sidebar::where('Status', 0)->get();
-        $categorys = Category::where('Status', 0)->get();
-        $categorys_2 = Category::where('Status', 1)->get();
+        $sidebars = Sidebar::where('status', 0)->get();
+        $categorys = Category::where('status', 0)->get();
+        $categorys_2 = Category::where('status', 1)->get();
         $menus = Category::where('idSidebar', 6)->get();
         $date = $slug;
         return view('page.extension',compact('news','sidebars','categorys','categorys_2','menus','date','address'));
@@ -155,9 +155,9 @@ class UserController extends Controller
     public function getRecharge() {
         $address = Address::first();   
         $news = News::all();
-        $sidebars = Sidebar::where('Status', 0)->get();
-        $categorys = Category::where('Status', 0)->get();
-        $categorys_2 = Category::where('Status', 1)->get();
+        $sidebars = Sidebar::where('status', 0)->get();
+        $categorys = Category::where('status', 0)->get();
+        $categorys_2 = Category::where('status', 1)->get();
         $menus = Category::where('idSidebar', 6)->get();
         return view('page.recharge',compact('news','sidebars','categorys','categorys_2','menus','address'));
     }
