@@ -307,7 +307,7 @@ class AdminController extends Controller
 
 		public function getQuesetion()
 		{	
-			$categorys = Category::where('Status', 0)->get();
+			$categorys = Category::where('status', 0)->get();
 			$desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
 			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug')
 			 ->where('category.status',0)
