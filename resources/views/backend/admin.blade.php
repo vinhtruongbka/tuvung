@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Admin</title>
-     <base href="{{asset('')}}">
+     <base href="{{secure_asset('')}}">
     <!-- Bootstrap -->
     <link href="public/admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
