@@ -4,6 +4,17 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\MessageBag;
+use App\News;
+use App\Sidebar;
+use App\Category;
+use App\Menu;
+use App\Vietnam;
+use App\Korean;
+use App\Vocabulary;
 
 class LoginController extends Controller
 {
@@ -25,7 +36,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -36,4 +47,6 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+     
 }

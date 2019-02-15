@@ -8,6 +8,6 @@ class Vocabulary extends Model
 {
     protected $table = "vocabulary";
     protected $fillable = [
-        'id', 'idCategorychi','korean','vietnamese','audio','images','status','created_at', 'updated_at'
+        'id', 'idCategorychi','audio','images','vietnamtrue','koreantrue','status','created_at', 'updated_at'
     ];
 }

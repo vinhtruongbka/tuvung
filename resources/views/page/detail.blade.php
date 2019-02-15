@@ -2,19 +2,24 @@
 @section('content')
 <div class="row ali">
    <div class="col-xs-12 col-md-9">
-       <p class="warning">Cộng thêm 50% khi chuyển khoản từ ngày 01-01-2019 đến hết ngày 05-01-2019. </p>
         <div class="pageindex">
-            @if ($desc !=null)
-                <div class="desn"><div class="show_title_new"><h1>{{$desc->newsTitle}}</h1></div>
+          <?php if ($desc !=null): ?>
+            <div class="desn"><div class="show_title_new"><h1>{{$desc->newsTitle}}</h1></div>
                 <div class="show_content_new">
-                    {{$desc->Content}}
+                    {{$desc->content}}
                 </div>
             </div>
-            @else
-               <div class="alert alert-danger" style="margin-top: 20px;">
+          <?php elseif($desc2 !=null): ?>
+             <div class="desn"><div class="show_title_new"><h1>{{$desc2->title}}</h1></div>
+                <div class="show_content_new">
+                    {!!$desc2->content!!}
+                </div>
+            </div>
+          <?php else: ?>
+            <div class="alert alert-danger" style="margin-top: 20px;">
                     Hiện tại chưa có bài viết nào!
               </div>
-            @endif
+          <?php endif ?>
         </div>
 <hr />   
   </div>

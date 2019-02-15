@@ -10,19 +10,67 @@ use App\Category;
 use App\Categorychi;
 use App\Menu;
 use App\Vocabulary;
+use App\User;
+use App\Role;
+use Illuminate\Support\Facades\Auth;
+use App\Address;
 
 class AdminController extends Controller
 {
-    public function getIndex()
+
+    public function getIndex(Request $request)
+		{	
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				$role_manager  = Role::where('name', 'admin')->first();
+
+				$idUsers = DB::table('users')->join('role_user', 'users.id', '=', 'role_user.user_id')
+				->select('users.id')
+				->where('role_user.role_id','!=',$role_manager->id)
+				->groupBy('id')
+				->get();
+				$id= json_decode( json_encode($idUsers), true);
+				$users = DB::table('users')->whereIn('id', $id)
+				->get();
+				return view('backend.page.home',compact('users'));
+			} else {
+				return redirect()->intended('/admin/login');
+			}
+			
+		}
+	public function getLoginAdmin()
 		{	
 			
-			return view('backend.page.home');
+			return view('backend.login');
+		}
+
+	public function getErr()
+		{	
+			
+			return view('backend.page.err');
+		}
+	public function getProfile()
+		{	
+			return view('backend.page.profile');
+		}
+	public function getAddress()
+		{	
+			$address = Address::first();
+			return view('backend.page.address',compact('address'));
+		}
+	public function getPassword()
+		{	
+			return view('backend.page.password');
+		}
+	public function getFile()
+		{	
+			
+			return view('backend.page.file');
 		}
 
 	public function getCategory()
 		{	
 			$sidebars = Sidebar::all();
-			$desc = DB::table('sidebar')->join('category', 'sidebar.id', '=', 'category.SidebarID')
+			$desc = DB::table('sidebar')->join('category', 'sidebar.id', '=', 'category.idSidebar')
 			 ->select('category.*','sidebar.Title as sidebarTitle')
 			 ->get();
 
@@ -43,8 +91,115 @@ class AdminController extends Controller
 
 	public function getPost()
 		{	
-			 $categorys = Category::all();
+			 $categorys = Category::where('status','1')->orWhere('status','3')->get();
 			return view('backend.page.post',compact('categorys'));
+		}
+	public function getEditPost($slug)
+		{
+			$categorys = Category::where('status','1')->orWhere('status','3')->get();
+			$news = DB::table('news')->join('category', 'category.id', '=', 'news.idCategory')
+			 ->select('news.*','category.title as categoryTitle')
+			 ->where('news.slug',$slug)
+			 ->first();
+			return view('backend.page.editPost',compact('news','categorys'));
+		}
+	public function getListPost()
+		{	
+			 $news = DB::table('news')->join('category', 'category.id', '=', 'news.idCategory')
+			 ->select('news.*','category.title as categoryTitle')
+			 ->get();
+			return view('backend.page.postList',compact('news'));
+		}
+
+		public function updateNews(Request $req)
+		{	
+			$link =$req->images;
+			$base_url =  asset('')."uploads/";
+			$images = str_replace($base_url,"",$link);
+			 DB::table('news')
+			    ->where('id', $req->idNews)
+			    ->update([
+			   		'title' => $req->title,
+			        'slug' => $req->slug,
+			        'desc' => $req->desc,
+			        'content' => $req->content,
+			        'images' => $images,
+			        'idCategory' => $req->idCategory,
+			   	]);
+			return redirect()->route('admin.getListPost');
+		}
+
+		public function updateAddress(Request $req)
+		{	
+			$link =$req->images;
+			$base_url =  asset('')."uploads/";
+			$images = str_replace($base_url,"",$link);
+			 DB::table('address')
+			    ->where('id', $req->id)
+			    ->update([
+			        'content' => $req->desc,
+			        'images' => $images,
+			   	]);
+			return redirect()->route('admin.getAddress');
+		}
+
+		public function updateUser(Request $req)
+		{	
+			$user = User::find($req->idUser);
+			$money = $user->money + $req->money;
+			 DB::table('users')
+			    ->where('id', $req->idUser)
+			    ->update([
+			   		'money' => $money
+			   	]);
+			return redirect()->route('admin.index');
+		}
+
+		public function updateAdmin(Request $req)
+		{	
+			$link =$req->images;
+			$base_url =  asset('')."uploads/";
+			$images = str_replace($base_url,"",$link);
+			 DB::table('users')
+			    ->where('id', $req->id)
+			    ->update([
+			   		'name' => $req->name,
+			   		'email' => $req->email,
+			   		'birth' => date('Y-m-d',strtotime($req->birth)),
+			   		'sex' => $req->sex,
+			   		'images' => $images,
+			   	]);
+			return redirect()->route('admin.getProfile');
+		}
+		public function updatePassword(Request $req)
+		{	
+			if ($req->password != $req->password2) {
+				 return redirect()->back()->with(['flag'=>'danger','message'=>'Mật khẩu không giống nhau']);
+			}
+			 DB::table('users')
+			    ->where('id', $req->id)
+			    ->update([
+			   		'password' =>  bcrypt($req->password),
+			   	]);
+			return redirect()->route('admin.getProfile');
+		}
+		public function getEditUser($id)
+		{	
+			
+			$user = User::where('users.id',$id)->first();
+      		return $user;
+		}
+
+		public function deleteNews($id)
+		{	
+			News::find($id)->delete();
+			return redirect()->route('admin.getListPost');
+		}
+
+		public function deleteUser($id)
+		{	
+			User::find($id)->delete();
+			return redirect()->route('admin.index');
 		}
 
 	public function getVocabularyList()
@@ -57,7 +212,7 @@ class AdminController extends Controller
 
 	public function getCategoryList()
 		{	
-			 $categorys = Category::where('status','0')->get();
+			 $categorys = Category::all();
 			 $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
 			 ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.Title as categoryTitle','categorychi.idCategory')
 			 ->get();
@@ -67,7 +222,7 @@ class AdminController extends Controller
 	public function getCategoryListDetail($id)
 		{	
 			 $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
-			 ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.Title as categoryTitle','categorychi.idCategory')
+			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.Title as categoryTitle','categorychi.idCategory')
 			 ->where('categorychi.id',$id)
 			 ->first();
 			  $categorys = Category::all();
@@ -85,9 +240,9 @@ class AdminController extends Controller
 
 	public function getIdCategory($id)
 		{	
-			
+			$sidebar = Sidebar::all();
 			 $category = Category::where('Category.id',$id)->first();
-			$data = array('category'=>$category);
+			$data = array('category'=>$category,'sidebar'=>$sidebar);
       		return $data;
 		}
 
@@ -111,17 +266,31 @@ class AdminController extends Controller
 	        return redirect()->route('adminGetSidebar');
 		} 
 
+	public function addPosts(Request $req)
+		{
+			$link =$req->images;
+			$base_url =  asset('')."uploads/";
+			$images = str_replace($base_url,"",$link);
+			$news = new News;
+	        $news->title = $req->title;
+	        $news->slug = $req->slug;
+	        $news->desc = $req->desc;
+	        $news->content = $req->content;
+	        $news->images = $images;
+	        $news->idCategory = $req->idCategory;
+	        $news->save();
+
+	        return redirect()->route('admin.getListPost');
+		
+	    }
 	public function postCategory(Request $req)
 		{	
-			$status = 0;
-			if ($req->Status == 1) {
-				$status = 1;
-			}
+
 			$category = new Category;
-	        $category->Title = $req->title;
+	        $category->title = $req->title;
 	        $category->slug = $req->slug;
-	        $category->SidebarID = $req->SidebarID;
-	        $category->Status = $status;
+	        $category->idSidebar = $req->idSidebar;
+	        $category->status = $req->optradio;
 	        $category->save();
 
 	        return redirect()->route('adminCategory');
@@ -140,8 +309,8 @@ class AdminController extends Controller
 		{	
 			$categorys = Category::where('Status', 0)->get();
 			$desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
-			 ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug')
-			 ->where('category.Status',0)
+			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug')
+			 ->where('category.status',0)
 			 ->get();
 			return view('backend.page.question',compact('categorys','desc'));
 		}
@@ -159,16 +328,25 @@ class AdminController extends Controller
 		}
 
 			public function postLearningWords(Request $req)
-		{	
+		{				
+			$data = array();
 
-			$data = array(
-			    array('idCategorychi'=>$req->idCategory, 'korean'=>$req->korean1,'vietnamese'=>$req->vietnamese1,'audio'=>$req->audio1->getClientOriginalName(),'images'=>$req->image1->getClientOriginalName()),
-			    array('idCategorychi'=>$req->idCategory, 'korean'=>$req->korean2,'vietnamese'=>$req->vietnamese2,'audio'=>$req->audio2->getClientOriginalName(),'images'=>$req->image2->getClientOriginalName())
-			);
-			$req->audio1->move('uploads/audio', $req->audio1->getClientOriginalName());
-			$req->image1->move('uploads/images', $req->image1->getClientOriginalName());
+			    for ($i=0; $i <6 ; $i++) {
+			    	$audio = 'audio'.$i;
+			    	$images = 'images'.$i;
+			    	$vietnamtrue = 'vietnamtrue'.$i;
+			    	$koreantrue = 'koreantrue'.$i;
 
-			Vocabulary::insert($data);
+			    	if ($req->$koreantrue && $req->$vietnamtrue && $req->$audio != null && $req->$images != null) {
+		    			$arrayName = array('idCategorychi'=> $req->idCategorychi, 'audio'=> $req->$audio->getClientOriginalName(),'images'=> $req->$images->getClientOriginalName(),'vietnamtrue' => $req->$vietnamtrue,'koreantrue' => $req->$koreantrue);
+		  					array_push($data, $arrayName);
+		  					$req->$audio->move('uploads/audio', $req->$audio->getClientOriginalName());
+							$req->$images->move('uploads/images', $req->$images->getClientOriginalName());
+			    		}	
+			    };
+			Vocabulary::insert($data); 
+			return redirect()->route('admin.VocabularyList');
+
 		}
 
 		public function DeleteCategoryListDetail($id)
@@ -215,7 +393,8 @@ class AdminController extends Controller
 			    ->where('id', $req->id)
 			    ->update([
 			   		'Title' => $req->title,
-			   		'Slug' => $req->slug
+			   		'Slug' => $req->slug,
+			   		'idSidebar'=>$req->idSidebar
 			   	]);
 			return redirect()->route('adminCategory');
 		}
@@ -227,25 +406,24 @@ class AdminController extends Controller
 			$audio = "";
 
 			if ($req->hasFile('images')) {
-				$images = $req->images;
-				$req->image1->move('uploads/images', $req->image1->getClientOriginalName());
+				$images = $req->images->getClientOriginalName();
+				$req->images->move('uploads/images', $req->images->getClientOriginalName());
 			}else {
 				$images = $vocabulary->images;
 			}
 
 			if ($req->hasFile('audio')) {
-				$audio = $req->audio;
-				$req->audio1->move('uploads/audio', $req->audio1->getClientOriginalName());
+				$audio = $req->audio->getClientOriginalName();
+				$req->audio->move('uploads/audio', $req->audio->getClientOriginalName());
 			}else {
 				$audio = $vocabulary->audio;
 			}
 
-
 			 DB::table('vocabulary')
 			    ->where('id', $req->id)
 			    ->update([
-			   		'korean' => $req->korean,
-			   		'vietnamese' => $req->vietnamese,
+			   		'koreantrue' => $req->koreantrue,
+			   		'vietnamtrue' => $req->vietnamtrue,
 			   		'images' => $images,
 			   		'audio' => $audio    		
 			   	]);

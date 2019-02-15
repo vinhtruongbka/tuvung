@@ -11,13 +11,28 @@
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <li>
-                <a href='https://tuvungtienghan.com/'>trang chủ</a>
+                <a href='{{ route('home.index')}}'>trang chủ</a>
             </li>
             @foreach ($menus as $menu)
             <li>
-                <a href='https://tuvungtienghan.com/'>{{$menu->Title}}</a>
+                <a href='{{ route('home.Quesetion',$menu->slug)}}'>{{$menu->title}}</a>
             </li>
             @endforeach
+            @if (Auth::check())
+                <li>
+                    <a href='{{ route('home.getMoney')}}'>Quản trị</a>
+                </li>
+                <li>
+                    <a href='{{ route('postLogout')}}'>Đăng xuất</a>
+                </li>
+            @else
+                <li>
+                    <a href='{{ route('home.getRegisration')}}'>Đăng ký</a>
+                </li>
+                <li>
+                    <a href='{{ route('getLogin')}}'>Đăng nhập</a>
+                </li>
+            @endif
         </ul>
     </div><!--/.nav-collapse -->
 </div>

@@ -1,6 +1,9 @@
 <?php
-
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+use App\User;
+use App\Role;
+use App\Vocabulary;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,5 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+         $this->call(RoleTableSeeder::class);
+   	 	$this->call(UserTableSeeder::class);
+        $this->call(VocabularyTableSeeder::class);
     }
 }

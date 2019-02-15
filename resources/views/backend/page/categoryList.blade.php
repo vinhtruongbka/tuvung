@@ -12,7 +12,6 @@
 				<th>Tên danh mục từ vựng</th>
 				<th>Đường dẫn</th>
 				<th>Thay đổi</th>
-				<th>Xóa</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,21 +20,20 @@
 			<!-- start form for validation -->
 			<tr>
 				<td>
-					<div class="div{{$des->categorychiId}}">{{$des->categoryTitle}}</div>
+					<div >{{$des->categoryTitle}}</div>
 				</td>
 				<td>
-					<div class="div{{$des->categorychiId}}">{{$des->categorychiTitle}}</div>
+					<div>{{$des->categorychiTitle}}</div>
 				</td>
 				<td>
-					<div class="div{{$des->categorychiId}}">{{$des->categorychiSlug}}</div>
+					<div>{{$des->categorychiSlug}}</div>
 				</td>
 				<td>
-					<a href="{{ route('admin.getCategoryListDetail',$des->categorychiId) }}" class="edit"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal4">Sửa</button></a>
+					<a href="{{ route('admin.getCategoryListDetail',$des->categorychiId) }}" class="edit"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal4">Sửa</button>
+					</a>
+					<a href="{{ route('admin.DeleteCategoryListDetail',$des->categorychiId) }}"> <button type="button" class="btn btn-danger btn-sm">Xóa</button>
+					</a>
 				</td>
-				<td>
-					<a href="{{ route('admin.DeleteCategoryListDetail',$des->categorychiId) }}"> <button type="button" class="btn btn-danger btn-sm">Xóa</button></a>
-				</td>
-
 			</tr>
 
 			<!-- end form for validations -->
@@ -66,7 +64,7 @@
 				<label for="fullname">Chuyên mục * :</label>
 				<select id="heard" class="form-control" required name="idCategory">
 					@foreach ($categorys as $category)
-					<option value="{{$category->id}}">{{$category->Title}}</option>
+					<option value="{{$category->id}}">{{$category->title}}</option>
 					@endforeach
 				</select>
 				<br/>
@@ -100,7 +98,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">Modal Header</h4>
+	        <h4 class="modal-title">Sửa danh mục con</h4>
 	      </div>
 	      <div class="modal-body">
 	      	<form id="editCategoryChi-form" data-parsley-validate action="{{ route('admin.updateCategogryChi') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">

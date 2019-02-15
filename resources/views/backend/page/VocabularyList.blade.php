@@ -25,18 +25,19 @@
 					{{$des->categorychiTitle}}
 				</td>
 				<td>
-					{{$des->korean}}
+					{{$des->koreantrue}}
 				</td>
 				<td>
-					{{$des->vietnamese}}
+					{{$des->vietnamtrue}}
 				</td>
 				<td>
 					<img src="./uploads/images/{{$des->images}}" class="img-responsive">
 				</td>
 				<td>
-					<audio controls >
-					  <source src="./uploads/audio/{{$des->audio}}" type="audio/mpeg">
-					</audio>
+					<div class="voca_children">
+		              <a href="./uploads/audio/{{$des->audio}}" class="sm2_button sound_button">
+		              </a>
+		          	</div>
 				</td>
 				<td>
 					<a href="{{ route('admin.editVocabulary',$des->id) }}" class="editVocabulary"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal4">Sửa</button></a>
@@ -66,11 +67,11 @@
 	      <div class="modal-body">
 	      	<form id="" data-parsley-validate action="{{ route('admin.updateVocabulary') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 				<label for="fullname">Tiếng Hàn * :</label>
-				<input type="text" name="korean" class="form-control" id="editKoreaVocabulary" />
+				<input type="text" name="koreantrue" class="form-control" id="editKoreaVocabulary" />
 				<input type="hidden" id="editIdVocabulary"  class="form-control" name="id"  />
 				<br/>
 				<label for="fullname">Tiếng Việt * :</label>
-				<input type="text" name="vietnamese" class="form-control" id="editVietVocabulary" />
+				<input type="text" name="vietnamtrue" class="form-control" id="editVietVocabulary" />
 				<br/>
 				<label for="fullname">Chuyên mục * :</label>
 				<select id="heardVocabulary" class="form-control" required name="idCategorychi">

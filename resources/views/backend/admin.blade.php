@@ -23,10 +23,32 @@
     <link href="public/admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="public/admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="public/admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="public/source/css/miniplayer.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="public/source/css/mp3_player.css" type="text/css" media="screen" />
+   {{-- <link rel="stylesheet" href="public/source/css/noview.css" type="text/css" media="screen" />
+    <script type="text/javascript" charset="utf-8" src="public/source/js/noview.js"></script> --}}
+    <script type="text/javascript" charset="utf-8" src="public/source/js/jquery-1.11.1min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="public/source/js/audio_test_clicks.js"></script>
+    <!-- <script type="text/javascript" charset="utf-8" src="public/source/js/menuHome.js"></script> -->
+    <script type="text/javascript" charset="utf-8" src="public/source/js/soundmanager2.js"></script>
+    
+    <script>soundManager.setup({url: "swf/"});</script><script type="text/javascript" charset="utf-8" src="public/source/js/mp3-player-button-1.js"></script>
 
     <!-- Custom Theme Style -->
     <link href="public/admin/build/css/custom.min.css" rel="stylesheet">
+
+    <script>
+        function base_url(){
+           return "<?php echo asset('');?>" ;
+         }
+     </script>
+     <style>
+        p img {
+            display: block;
+        }
+    </style>
   </head>
+
 
   <body class="nav-md">
     <div class="container body">
@@ -38,17 +60,9 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Chào mừng bạn đến với trang quản trị</h3>
-              </div>
-
+              </div> 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -64,7 +78,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            Vinhtruong - 0359984007
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -127,6 +141,8 @@
     <script src="public/admin/build/js/custom.js"></script>
 
     <script type="text/javascript" src="public/admin/js/func.js"></script>
+    <script src="public/admin/tinymce/tinymce.min.js"></script>
+    <script src="public/admin/tinymce/config.js"></script>
 
   </body>
 </html>

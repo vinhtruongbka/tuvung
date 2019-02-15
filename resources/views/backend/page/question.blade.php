@@ -23,7 +23,7 @@
 		</div>
 		<div class="x_content">
 	<form id="demo-form5" data-parsley-validate action="{{ route('admin.postLearningWords') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-			<select id="heard" class="form-control" required name="idCategory">
+			<select id="heard" class="form-control" name="idCategorychi">
 				@foreach ($desc as $des)
 					<option value="{{$des->categorychiId}}">{{$des->categorychiTitle}}</option>
 				@endforeach
@@ -40,47 +40,39 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td><input type="text" name="korean1"  /></td>
-						<td><input type="text" name="vietnamese1"  /></td>
-						<td><input type="file" name="image1"  /></td>
-						<td><input type="file" name="audio1"  /></td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td><input type="text" name="korean2"  /></td>
-						<td><input type="text" name="vietnamese2"  /></td>
-						<td><input type="file" name="image2"  /></td>
-						<td><input type="file" name="audio2"  /></td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td><input type="text" name="korean3"  /></td>
-						<td><input type="text" name="vietnamese3"  /></td>
-						<td><input type="file" name="image3"  /></td>
-						<td><input type="file" name="audio3"  /></td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td><input type="text" name="korean4"  /></td>
-						<td><input type="text" name="vietnamese4"  /></td>
-						<td><input type="file" name="image4"  /></td>
-						<td><input type="file" name="audio4"  /></td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td><input type="text" name="korean5"  /></td>
-						<td><input type="text" name="vietnamese5"  /></td>
-						<td><input type="file" name="image5"  /></td>
-						<td><input type="file" name="audio5"  /></td>
-					</tr>
+					<?php for ($i=0; $i < 6; $i++): ?>
+						<tr>
+							<th scope="row">{{$i}}</th>
+							<td><input type="text" name="koreantrue{{$i}}" class="form-control" /></td>
+							<td><input type="text" name="vietnamtrue{{$i}}" class="form-control"/></td>
+							<td>
+								<input type="file" name="images{{$i}}"  class="form-control"/>
+							</td>
+							<td>
+								<input type="file" name="audio{{$i}}"  class="form-control"/>
+							</td>
+						</tr>
+					<?php endfor ?>
 				</tbody>
 			</table>
 		<input type="hidden" name="_token" value="{{csrf_token()}}">
 		<button class="btn btn-primary" type="submit">Thêm mới</button>
 
 	</form>
+	 <div class="modal fade my-modal" id="modal-id">
+         <div class="modal-dialog  modal-lg">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                     <h4 class="modal-title">Upload ảnh</h4>
+                 </div>
+                 <div class="modal-body">
+                     <iframe   src="file/dialog.php?field_id=image_link_upload" style="border: none;width: 100%;height: 400px;">
+                      </iframe>
+                 </div>
+             </div>
+         </div>
+     </div>
 		</div>
 	</div>
 </div>

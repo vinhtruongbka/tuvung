@@ -10,22 +10,65 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::group(['prefix' => ''], function() {
-    Route::get('/', [
-		'uses'=>'PageController@getIndex',
+    Route::get('', [
+		'uses'=>'HomeController@getIndex',
 		'as'=>'home.index',
 		]);
 });
-Route::group(['prefix' => 'tieng-han/tu-vung-tieng-han/'], function() {
+Route::group(['prefix' => 'tieng-han/tu-vung-tieng-han'], function() {
     Route::get('/{slug}',[
-		'uses'=>'PageController@getDetail',
+		'uses'=>'homeController@getDetail',
 		'as'=>'home.detail',
 		]);
 });
 
-Route::group(['prefix' => 'tu-vung'], function() {
+Route::group(['prefix' => 'tai-khoan'], function() {
+    Route::get('/dang-ky',[
+		'uses'=>'UserController@getRegisration',
+		'as'=>'home.getRegisration',
+		]);
+    Route::get('/dang-nhap',[
+		'uses'=>'UserController@getLogin',
+		'as'=>'getLogin',
+		]);
+    Route::get('/dang-xuat',[
+		'uses'=>'UserController@postLogout',
+		'as'=>'postLogout',
+		]);
+    Route::post('/login', ['as' => 'login', 'uses' => 'UserController@postLogin']);
+    Route::post('/registration', ['as' => 'postRegistration', 'uses' => 'UserController@postRegistration']);
+});
+
+Route::group(['prefix' => 'quan-tri'], function() {
+    Route::get('quan-ly-tien-trong-tai-khoan',[
+		'uses'=>'UserController@getMoney',
+		'as'=>'home.getMoney',
+		]);
+    Route::get('/dang-nhap',[
+		'uses'=>'UserController@getLogin',
+		'as'=>'getLogin',
+		]);
+    Route::get('/dang-xuat',[
+		'uses'=>'UserController@postLogout',
+		'as'=>'postLogout',
+		]);
+    Route::get('/ra-han/{slug}',[
+		'uses'=>'UserController@getExtension',
+		'as'=>'getExtension',
+		]);
+    Route::get('/nap-tien-vao-tai-khoan',[
+		'uses'=>'UserController@getRecharge',
+		'as'=>'getRecharge',
+		]);
+    Route::post('add-ra-han', ['as' => 'postExtension', 'uses' => 'UserController@postExtension']);
+    Route::post('/login', ['as' => 'login', 'uses' => 'UserController@postLogin']);
+});
+
+Route::group(['prefix' => 'trang-chu'], function() {
     Route::get('/{slug}',[
-		'uses'=>'PageController@getQuesetion',
+		'uses'=>'HomeController@getQuesetion',
 		'as'=>'home.Quesetion',
 		]);
     Route::get('/{slug1}/{slug2}',[
@@ -40,16 +83,103 @@ Route::group(['prefix' => 'luyen-viet'], function() {
 		'as'=>'home.PracticeWriting',
 		]);
 });
+Route::group(['prefix' => 'luyen-nghe'], function() {
+    Route::get('/{slug}',[
+		'uses'=>'PageController@getpracticeListening',
+		'as'=>'home.practiceListening',
+		]);
+});
+
+Route::group(['prefix' => 'trac-nghiem'], function() {
+    Route::get('/{slug}',[
+		'uses'=>'PageController@getQuizz',
+		'as'=>'home.getQuizz',
+		]);
+});
 
 Route::group(['prefix' => '/admin'], function() {
+	Route::get('/login', [
+		'uses'=>'AdminController@getLoginAdmin',
+		'as'=>'admin.getLoginAdmin',
+		]);
+	Route::get('/profile', [
+		'uses'=>'AdminController@getProfile',
+		'as'=>'admin.getProfile',
+		]);
+	Route::get('/address', [
+		'uses'=>'AdminController@getAddress',
+		'as'=>'admin.getAddress',
+		]);
+	Route::get('/password', [
+		'uses'=>'AdminController@getPassword',
+		'as'=>'admin.getPassword',
+		]);
+	 Route::post('/login-admin', ['as' => 'loginAdmin', 'uses' => 'UserController@postLoginAdmin']);
+	 
    Route::get('/', [
 		'uses'=>'AdminController@getIndex',
 		'as'=>'admin.index',
 		]);
-   Route::get('/them-moi-bai-viet', [
+
+    Route::get('/file', [
+		'uses'=>'AdminController@getFile',
+		'as'=>'admin.getFile',
+		]);
+
+    Route::get('/err', [
+		'uses'=>'AdminController@getErr',
+		'as'=>'admin.getErr',
+		]);
+   Route::get('/bai-viet', [
 		'uses'=>'AdminController@getPost',
 		'as'=>'admin.addPost',
 		]);
+   Route::get('/danh-sach-bai-viet', [
+		'uses'=>'AdminController@getListPost',
+		'as'=>'admin.getListPost',
+		]);
+    Route::get('/sua-bai-viet/{slug}', [
+		'uses'=>'AdminController@getEditPost',
+		'as'=>'admin.getEditPost',
+		]);
+    Route::post('/update-news', [
+       	'uses'=>'AdminController@updateNews',
+       	'as'=>'admin.updateNews',
+       ]);
+    Route::post('/update-address', [
+       	'uses'=>'AdminController@updateAddress',
+       	'as'=>'admin.updateAddress',
+       ]);
+    Route::post('/update-user', [
+       	'uses'=>'AdminController@updateUser',
+       	'as'=>'admin.updateUser',
+       ]);
+    Route::post('/update-admin', [
+       	'uses'=>'AdminController@updateAdmin',
+       	'as'=>'admin.updateAdmin',
+       ]);
+    Route::post('/update-password', [
+       	'uses'=>'AdminController@updatePassword',
+       	'as'=>'admin.updatePassword',
+       ]);
+     Route::get('/edit-user/{id}', [
+		'uses'=>'AdminController@getEditUser',
+		'as'=>'admin.getEditUser',
+		]);
+     Route::get('/delete-user/{id}', [
+		'uses'=>'AdminController@deleteUser',
+		'as'=>'admin.deleteUser',
+		]);
+
+    Route::get('/sua-bai-viet/xoa/{id}', [
+		'uses'=>'AdminController@deleteNews',
+		'as'=>'admin.deleteNews',
+		]);
+
+   Route::post('/post-posts', [
+	'uses'=>'AdminController@addPosts',
+	'as'=>'addPosts',
+	]);
    Route::post('/post-sidebar', [
 	'uses'=>'AdminController@postSidebar',
 	'as'=>'adminPostSidebar',

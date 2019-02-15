@@ -9,8 +9,8 @@
     <!--start boottrap-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="public/source/css/bootstrap.min.css" type="text/css" media="screen" />
-      {{-- <script type="text/javascript" charset="utf-8" src="js/html5shiv.min.js"></script>
-      <script type="text/javascript"charset="utf-8"  src="js/respond.min.js"></script> --}}
+      <script type="text/javascript" charset="utf-8" src="js/html5shiv.min.js"></script>
+      <script type="text/javascript"charset="utf-8"  src="js/respond.min.js"></script>
      <link rel="stylesheet" href="public/source/css/style_edit.css" type="text/css" media="screen"/>
     <!--and boottrap-->
     <link rel="stylesheet" href="public/source/css/miniplayer.css" type="text/css" media="screen" />
@@ -19,7 +19,12 @@
     <script type="text/javascript" charset="utf-8" src="public/source/js/noview.js"></script>
     <script type="text/javascript" charset="utf-8" src="public/source/js/jquery-1.11.1min.js"></script>
     <script type="text/javascript" charset="utf-8" src="public/source/js/audio_test_clicks.js"></script>
-    <script type="text/javascript" charset="utf-8" src="public/source/js/menuHome.js"></script><!--mp3 playrer-->
+    <!-- <script type="text/javascript" charset="utf-8" src="public/source/js/menuHome.js"></script> -->
+    <script type="text/javascript" charset="utf-8" src="public/source/js/soundmanager2.js"></script>
+    
+    <script>soundManager.setup({url: "swf/"});</script><script type="text/javascript" charset="utf-8" src="public/source/js/mp3-player-button-1.js"></script><!--mp3 playrer-->
+    <!--mp3 playrer-->
+    <script>soundManager.setup({url: "swf/"});</script><script type="text/javascript" charset="utf-8" src="public/source/js/mp3-player-list-1.js"></script><!--mp3 playrer-->
 <!--
 <style>
     

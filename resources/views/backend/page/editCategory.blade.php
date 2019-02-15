@@ -32,7 +32,7 @@
 				<input type="text" id="slug2" class="form-control" name="slug" required />
 				<br/>
 				<label for="fullname">Chuyên mục * :</label>
-				<select id="heard" class="form-control" required name="SidebarID">
+				<select id="heard" class="form-control" required name="idSidebar">
 		           {{-- @foreach ($sidebars as $sidebar)
 		              <option value="{{$sidebar->id}}">{{$sidebar->Title}}</option>
 		           @endforeach --}}

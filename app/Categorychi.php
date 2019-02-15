@@ -8,6 +8,6 @@ class Categorychi extends Model
 {
     protected $table = "categorychi";
     protected $fillable = [
-        'id','idCategory', 'Title','Slug','status','created_at', 'updated_at'
+        'id','idCategory', 'title','slug','status','created_at', 'updated_at'
     ];
 }

@@ -173,7 +173,7 @@ $(document).on('click', '.editSidebar', function(e) {
           data: '',
           
           success: function(data) {
-            $('#editTileSidebar').val(data.sidebar.Title);
+            $('#editTileSidebar').val(data.sidebar.title);
             $('#editSlugSidebar').val(data.sidebar.slug);
             $('#editIdSidebar').val(data.sidebar.id);
           }
@@ -191,9 +191,16 @@ $(document).on('click', '.editCategory', function(e) {
           data: '',
           
           success: function(data) {
-            $('#editTileCategory').val(data.category.Title);
-            $('#editSlugCategory').val(data.category.Slug);
+            $('#editTileCategory').val(data.category.title);
+            $('#editSlugCategory').val(data.category.slug);
             $('#editIdCategory').val(data.category.id);
+             var html = '';
+            for (var i in data.sidebar) {
+
+               html+= '<option value="'+data.sidebar[i].id+'">'+data.sidebar[i].title+'</option>';
+               $('#heardCategory').html(html);
+            }
+            $('#heardCategory option[value='+data.category.idSidebar+']').attr('selected','selected');
           }
           
         });
@@ -210,19 +217,36 @@ $(document).on('click', '.editVocabulary', function(e) {
           data: '',
           
           success: function(data) {
-            $('#editKoreaVocabulary').val(data.vocabulary.korean);
-            $('#editVietVocabulary').val(data.vocabulary.vietnamese);
+            $('#editKoreaVocabulary').val(data.vocabulary.koreantrue);
+            $('#editVietVocabulary').val(data.vocabulary.vietnamtrue);
             $('#editIdVocabulary').val(data.vocabulary.id);
             // $('#editImageVocabulary').val(data.vocabulary.images);
             var html = '';
-            console.log(data.categorychi);
             for (var i in data.categorychi) {
 
-               html+= '<option value="'+data.categorychi[i].id+'">'+data.categorychi[i].Title+'</option>';
+               html+= '<option value="'+data.categorychi[i].id+'">'+data.categorychi[i].title+'</option>';
                $('#heardVocabulary').html(html);
             }
             $('#heardVocabulary option[value='+data.vocabulary.idCategorychi+']').attr('selected','selected');
              
+          }
+          
+        });
+});
+$(document).on('click', '#recharge', function(e) {
+    e.preventDefault();
+    var href = $(this).attr('href');
+        jQuery.ajax({
+          url: href,
+          type: 'GET',
+          dataType: 'json',
+          data: '',
+          
+          success: function(data) {
+            console.log(data);
+            $('#name').val(data.name);
+            $('#email').val(data.email);
+            $('#idUser').val(data.id);
           }
           
         });
