@@ -71,7 +71,7 @@ class AdminController extends Controller
 		{	
 			$sidebars = Sidebar::all();
 			$desc = DB::table('sidebar')->join('category', 'sidebar.id', '=', 'category.idSidebar')
-			 ->select('category.*','sidebar.Title as sidebarTitle')
+			 ->select('category.*','sidebar.title as sidebarTitle')
 			 ->get();
 
 			return view('backend.page.category',compact('sidebars','desc'));
@@ -205,7 +205,7 @@ class AdminController extends Controller
 	public function getVocabularyList()
 		{	
 			  $desc = DB::table('categorychi')->join('vocabulary', 'categorychi.id', '=', 'vocabulary.idCategorychi')
-			 ->select('categorychi.Title as categorychiTitle','vocabulary.*')
+			 ->select('categorychi.title as categorychiTitle','vocabulary.*')
 			 ->get();
 			return view('backend.page.VocabularyList',compact('desc'));
 		}
@@ -214,7 +214,7 @@ class AdminController extends Controller
 		{	
 			 $categorys = Category::all();
 			 $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
-			 ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.Title as categoryTitle','categorychi.idCategory')
+			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.title as categoryTitle','categorychi.idCategory')
 			 ->get();
 			return view('backend.page.categoryList',compact('categorys','desc'));
 		}
@@ -222,7 +222,7 @@ class AdminController extends Controller
 	public function getCategoryListDetail($id)
 		{	
 			 $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
-			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.Title as categoryTitle','categorychi.idCategory')
+			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.title as categoryTitle','categorychi.idCategory')
 			 ->where('categorychi.id',$id)
 			 ->first();
 			  $categorys = Category::all();
@@ -258,7 +258,7 @@ class AdminController extends Controller
 	public function postSidebar(Request $req)
 		{
 			$sidebar = new Sidebar;
-	        $sidebar->Title = $req->title;
+	        $sidebar->title = $req->title;
 	        $sidebar->slug = $req->slug;
 	        $sidebar->status = $req->optradio;
 	        $sidebar->save();
@@ -318,7 +318,7 @@ class AdminController extends Controller
 			public function postQuesetion(Request $req)
 		{	
 			$categorychi = new Categorychi;
-	        $categorychi->Title = $req->title;
+	        $categorychi->title = $req->title;
 	        $categorychi->slug = $req->slug;
 	        $categorychi->idCategory = $req->idCategory;
 	        $categorychi->status = $req->optradio;
@@ -380,8 +380,8 @@ class AdminController extends Controller
 			    ->where('id', $req->id)
 			    ->update([
 			   		'idCategory' => $req->idCategory,
-			   		'Title' => $req->title,
-			   		'Slug' => $req->slug
+			   		'title' => $req->title,
+			   		'slug' => $req->slug
 			   	]);
 			return redirect()->route('admin.getCategoryList');
 		}
@@ -392,8 +392,8 @@ class AdminController extends Controller
 			 DB::table('category')
 			    ->where('id', $req->id)
 			    ->update([
-			   		'Title' => $req->title,
-			   		'Slug' => $req->slug,
+			   		'title' => $req->title,
+			   		'slug' => $req->slug,
 			   		'idSidebar'=>$req->idSidebar
 			   	]);
 			return redirect()->route('adminCategory');
