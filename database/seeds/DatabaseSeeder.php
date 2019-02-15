@@ -1,9 +1,15 @@
 <?php
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use App\News;
+use App\Sidebar;
+use App\Category;
+use App\Vocabulary;
+use App\Categorychi;
 use App\User;
 use App\Role;
-use App\Vocabulary;
+use App\Address;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +24,11 @@ class DatabaseSeeder extends Seeder
          $this->call(RoleTableSeeder::class);
    	 	$this->call(UserTableSeeder::class);
         $this->call(VocabularyTableSeeder::class);
+        $this->call(AddressTableSeeder::class);
+         $this->call(CategorychiTableSeeder::class);
+        $this->call(SidebarTableSeeder::class);
+        $this->call(VocabularyTableSeeder::class);
+        $this->call(AddressTableSeeder::class);
+
     }
 }
