@@ -122,7 +122,7 @@ class UserController extends Controller
         ];
         if(Auth::attempt($data)){
            if ($request->user()->authorizeRoles('admin')) {
-              return redirect()->intended('/admin');
+              return redirect()->intended('/admin/home');
            } else {
                return redirect()->back()->with(['flag'=>'danger','message'=>'Bạn không có quyền truy cập trang này!']);
            } 
