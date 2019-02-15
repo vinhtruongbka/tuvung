@@ -68,7 +68,7 @@ public function getPracticeWritings($slug,Request $request){
         ->join('vocabulary', 'vocabulary.idCategorychi', '=', 'categorychi.id')
         ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*')
         ->where('categorychi.slug',$slug)
-        ->where('category.Status',0)
+        ->where('category.status',0)
         ->inRandomOrder()
         ->get();
         $desc2 = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
