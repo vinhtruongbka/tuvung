@@ -26,18 +26,18 @@ class PageController extends Controller
            if ($request->user()->authorizeRoles(['employee', 'admin'])) { 
             $address = Address::first();   
             $menus = Category::where('idSidebar', 6)->get();
-            $sidebars = Sidebar::where('Status', 0)->get();
-            $categorys = Category::where('Status', 0)->get();
-            $categorys_2 = Category::where('Status', 1)->get();
+            $sidebars = Sidebar::where('status', 0)->get();
+            $categorys = Category::where('status', 0)->get();
+            $categorys_2 = Category::where('status', 1)->get();
             $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
             ->join('vocabulary', 'vocabulary.idCategorychi', '=', 'categorychi.id')
-            ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*')
+            ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*')
             ->where('categorychi.slug',$slug2)
             ->where('category.status',0)
             ->get();
             $desc2 = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
             ->join('vocabulary', 'vocabulary.idCategorychi', '=', 'categorychi.id')
-            ->select('category.slug as categoryslug','categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.status as categorychiStatus','vocabulary.*')
+            ->select('category.slug as categoryslug','categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.status as categorychiStatus','vocabulary.*')
             ->where('categorychi.slug',$slug2)
             ->where('category.status',0)
             ->first();
@@ -61,21 +61,21 @@ public function getPracticeWritings($slug,Request $request){
 
         $address = Address::first();
         $menus = Category::where('idSidebar', 6)->get();
-        $sidebars = Sidebar::where('Status', 0)->get();
-        $categorys = Category::where('Status', 0)->get();
-        $categorys_2 = Category::where('Status', 1)->get();
+        $sidebars = Sidebar::where('status', 0)->get();
+        $categorys = Category::where('status', 0)->get();
+        $categorys_2 = Category::where('status', 1)->get();
         $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
         ->join('vocabulary', 'vocabulary.idCategorychi', '=', 'categorychi.id')
-        ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*')
+        ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*')
         ->where('categorychi.slug',$slug)
         ->where('category.Status',0)
         ->inRandomOrder()
         ->get();
         $desc2 = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
         ->join('vocabulary', 'vocabulary.idCategorychi', '=', 'categorychi.id')
-        ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*','category.slug as categorySlug')
+        ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*','category.slug as categorySlug')
         ->where('categorychi.slug',$slug)
-        ->where('category.Status',0)
+        ->where('category.status',0)
         ->first();
         return view('page.practiceWriting',compact('sidebars','categorys','categorys_2','menus','desc','desc2','address'));
     } else {
@@ -98,21 +98,21 @@ public function getpracticeListening($slug,Request $request){
 
         $address = Address::first();
         $menus = Category::where('idSidebar', 6)->get();
-        $sidebars = Sidebar::where('Status', 0)->get();
-        $categorys = Category::where('Status', 0)->get();
-        $categorys_2 = Category::where('Status', 1)->get();
+        $sidebars = Sidebar::where('status', 0)->get();
+        $categorys = Category::where('status', 0)->get();
+        $categorys_2 = Category::where('status', 1)->get();
         $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
         ->join('vocabulary', 'vocabulary.idCategorychi', '=', 'categorychi.id')
-        ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*')
+        ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*')
         ->where('categorychi.slug',$slug)
-        ->where('category.Status',0)
+        ->where('category.status',0)
         ->inRandomOrder()
         ->get();
         $desc2 = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
         ->join('vocabulary', 'vocabulary.idCategorychi', '=', 'categorychi.id')
         ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*','category.slug as categorySlug')
         ->where('categorychi.slug',$slug)
-        ->where('category.Status',0)
+        ->where('category.status',0)
         ->first();
         return view('page.practiceListening',compact('sidebars','categorys','categorys_2','menus','desc','desc2','address'));
     } else {
@@ -135,22 +135,22 @@ public function getQuizz($slug,Request $request){
 
         $address = Address::first();
         $menus = Category::where('idSidebar', 6)->get();
-        $sidebars = Sidebar::where('Status', 0)->get();
-        $categorys = Category::where('Status', 0)->get();
-        $categorys_2 = Category::where('Status', 1)->get();
+        $sidebars = Sidebar::where('status', 0)->get();
+        $categorys = Category::where('status', 0)->get();
+        $categorys_2 = Category::where('status', 1)->get();
         $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
         ->join('vocabulary', 'vocabulary.idCategorychi', '=', 'categorychi.id')
-        ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*')
+        ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*')
         ->where('categorychi.slug',$slug)
-        ->where('category.Status',0)
+        ->where('category.status',0)
         ->inRandomOrder()
         ->get(); 
         // dd($desc);
         $desc2 = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
         ->join('vocabulary', 'vocabulary.idCategorychi', '=', 'categorychi.id')
-        ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*','category.slug as categorySlug')
+        ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*','category.slug as categorySlug')
         ->where('categorychi.slug',$slug)
-        ->where('category.Status',0)
+        ->where('category.status',0)
         ->first();
         $desc3 = Vocabulary::all();
         return view('page.quizz',compact('sidebars','categorys','categorys_2','menus','desc','desc2','desc3','address'));
