@@ -96,7 +96,10 @@ Route::group(['prefix' => 'trac-nghiem'], function() {
 		'as'=>'home.getQuizz',
 		]);
 });
-
+Route::get('/admin', [
+		'uses'=>'AdminController@getIndex',
+		'as'=>'admin.index',
+		]);
 Route::group(['prefix' => '/admin'], function() {
 	Route::get('/login', [
 		'uses'=>'AdminController@getLoginAdmin',
@@ -115,11 +118,6 @@ Route::group(['prefix' => '/admin'], function() {
 		'as'=>'admin.getPassword',
 		]);
 	 Route::post('/login-admin', ['as' => 'loginAdmin', 'uses' => 'UserController@postLoginAdmin']);
-	 
-   Route::get('', [
-		'uses'=>'AdminController@getIndex',
-		'as'=>'admin.index',
-		]);
 
     Route::get('/file', [
 		'uses'=>'AdminController@getFile',
