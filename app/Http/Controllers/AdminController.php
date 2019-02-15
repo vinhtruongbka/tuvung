@@ -20,8 +20,22 @@ class AdminController extends Controller
 
     public function getIndex(Request $request)
 		{	
-			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
-				$role_manager  = Role::where('name', 'admin')->first();
+			// if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+			// 	$role_manager  = Role::where('name', 'admin')->first();
+
+			// 	$idUsers = DB::table('users')->join('role_user', 'users.id', '=', 'role_user.user_id')
+			// 	->select('users.id')
+			// 	->where('role_user.role_id','!=',$role_manager->id)
+			// 	->groupBy('id')
+			// 	->get();
+			// 	$id= json_decode( json_encode($idUsers), true);
+			// 	$users = DB::table('users')->whereIn('id', $id)
+			// 	->get();
+			// 	return view('backend.page.home',compact('users'));
+			// } else {
+			// 	return redirect()->intended('/admin/login');
+			// }
+			// $role_manager  = Role::where('name', 'admin')->first();
 
 				$idUsers = DB::table('users')->join('role_user', 'users.id', '=', 'role_user.user_id')
 				->select('users.id')
@@ -32,9 +46,6 @@ class AdminController extends Controller
 				$users = DB::table('users')->whereIn('id', $id)
 				->get();
 				return view('backend.page.home',compact('users'));
-			} else {
-				return redirect()->intended('/admin/login');
-			}
 			
 		}
 	public function getLoginAdmin()
