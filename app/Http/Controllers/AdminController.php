@@ -20,7 +20,6 @@ class AdminController extends Controller
 
     public function getIndex(Request $request)
 		{	
-			dd(User::all());
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				$role_manager  = Role::where('name', 'admin')->first();
 
