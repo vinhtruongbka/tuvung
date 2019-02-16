@@ -233,7 +233,7 @@ class AdminController extends Controller
 	public function getIdSidebar($id)
 		{	
 			
-			 $sidebar = Sidebar::where('Sidebar.id',$id)->first();
+			 $sidebar = Sidebar::where('sidebar.id',$id)->first();
 			$data = array('sidebar'=>$sidebar);
       		return $data;
 		}
@@ -241,7 +241,7 @@ class AdminController extends Controller
 	public function getIdCategory($id)
 		{	
 			$sidebar = Sidebar::all();
-			 $category = Category::where('Category.id',$id)->first();
+			 $category = Category::where('category.id',$id)->first();
 			$data = array('category'=>$category,'sidebar'=>$sidebar);
       		return $data;
 		}
@@ -437,8 +437,8 @@ class AdminController extends Controller
 			 DB::table('sidebar')
 			    ->where('id', $req->id)
 			    ->update([
-			   		'Title' => $req->title,
-			   		'Slug' => $req->slug
+			   		'title' => $req->title,
+			   		'slug' => $req->slug
 			   	]);
 			return redirect()->route('adminGetSidebar');
 		}
