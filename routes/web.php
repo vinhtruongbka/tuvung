@@ -19,7 +19,7 @@ Route::group(['prefix' => ''], function() {
 });
 Route::group(['prefix' => 'tieng-han/tu-vung-tieng-han'], function() {
     Route::get('/{slug}',[
-		'uses'=>'homeController@getDetail',
+		'uses'=>'HomeController@getDetail',
 		'as'=>'home.detail',
 		]);
 });
