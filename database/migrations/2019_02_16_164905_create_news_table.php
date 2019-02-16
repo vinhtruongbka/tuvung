@@ -23,7 +23,7 @@ class CreateNewsTable extends Migration
             $table->text('content');
             $table->integer('status')->default(0);
             $table->timestamps();
-        }
+        });
     }
 
     /**
