@@ -40,7 +40,7 @@ class HomeController extends Controller
         ->select('news.title as newsTitle','news.content','category.*')
         ->where('category.slug',$slug)
         ->first();
-            $desc2 = News::where('Slug', $slug)->first();
+            $desc2 = News::where('slug', $slug)->first();
             return view('page.detail',compact('sidebars','categorys','categorys_2','desc','menus','desc2','address')); 
     }
 
