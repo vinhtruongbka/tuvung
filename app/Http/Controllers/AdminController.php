@@ -91,7 +91,7 @@ class AdminController extends Controller
 
 	public function getPost()
 		{	
-			 $categorys = Category::where('status','1')->orWhere('status','3')->get();
+			 $categorys = Category::where('status','1')->orWhere('status','2')->get();
 			return view('backend.page.post',compact('categorys'));
 		}
 	public function getEditPost($slug)
