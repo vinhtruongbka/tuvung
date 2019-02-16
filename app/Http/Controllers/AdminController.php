@@ -260,7 +260,6 @@ class AdminController extends Controller
 			$sidebar = new Sidebar;
 	        $sidebar->title = $req->title;
 	        $sidebar->slug = $req->slug;
-	        $sidebar->status = $req->optradio;
 	        $sidebar->save();
 
 	        return redirect()->route('adminGetSidebar');
