@@ -20,19 +20,19 @@ class SidebarTableSeeder extends Seeder
     public function run()
     {
 			$sidebar = new Sidebar;
-	        $sidebar->title = 'menu';
-	        $sidebar->slug = 'menu';
-	        $sidebar->status = 1;
+	        $sidebar->title = 'tin tức trang chủ';
+	        $sidebar->slug = 'tin-tuc-trang-chu';
+	        $sidebar->status = 2;
 	        $sidebar->save();
 
-        	$sidebar = new Sidebar;
-	        $sidebar->title = 'đề thi xuất khẩu lao động';
-	        $sidebar->slug = 'de-thi-xuat-khau-lao-dong';
-	        $sidebar->save();
+        	// $sidebar = new Sidebar;
+	        // $sidebar->title = 'đề thi xuất khẩu lao động';
+	        // $sidebar->slug = 'de-thi-xuat-khau-lao-dong';
+	        // $sidebar->save();
 
-	        $sidebar = new Sidebar;
-	        $sidebar->title = 'ôn tập chuyên nghành sản xuất';
-	        $sidebar->slug = 'on-tap-chuyen-nghanh-san-xuat';
-	        $sidebar->save();
+	        // $sidebar = new Sidebar;
+	        // $sidebar->title = 'ôn tập chuyên nghành sản xuất';
+	        // $sidebar->slug = 'on-tap-chuyen-nghanh-san-xuat';
+	        // $sidebar->save();
     }
 }

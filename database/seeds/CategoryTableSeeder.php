@@ -19,19 +19,12 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        // $category = new Category;
-        // $category->idSidebar = 6;
-        // $category->title = 'chuyên nghành';
-        // $category->slug = 'chuyen-nghanh';
-        // // $category->status = 1;
-        // $category->save();
-        
+        $sidebar = Sidebar::where('title','tin tức trang chủ')->first();
         $category = new Category;
-        $category->idSidebar = 6;
-        $category->title = 'xkld-Đọc';
-        $category->slug = 'xkld-doc';
-        // $category->status = 1;
+        $category->idSidebar = $sidebar->id;
+        $category->title = 'Hiển thị trang chủ';
+        $category->slug = 'hiển thị trang chủ';
+        $category->status = 2;
         $category->save();
-
     }
 }
