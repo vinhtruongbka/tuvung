@@ -36,8 +36,8 @@ class HomeController extends Controller
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();
-        $desc = DB::table('news')->join('category', 'news.IdCategory', '=', 'category.id') 
-        ->select('news.title as newsTitle','news.Content','category.*')
+        $desc = DB::table('news')->join('category', 'news.idCategory', '=', 'category.id') 
+        ->select('news.title as newsTitle','news.content','category.*')
         ->where('category.slug',$slug)
         ->first();
             $desc2 = News::where('Slug', $slug)->first();
