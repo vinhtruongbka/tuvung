@@ -14,7 +14,6 @@ class CreateNewsTable extends Migration
     public function up()
     {
         Schema::create('news', function (Blueprint $table) {
-            Schema::create('news', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idCategory');
             $table->string('title', 255);
@@ -24,8 +23,6 @@ class CreateNewsTable extends Migration
             $table->text('content');
             $table->integer('status')->default(0);
             $table->timestamps();
-        });
-        });
     }
 
     /**
