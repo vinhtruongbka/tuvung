@@ -25,7 +25,10 @@ class PageController extends Controller
            }
            if ($request->user()->authorizeRoles(['employee', 'admin'])) { 
             $address = Address::first();   
-            $menus = Category::where('idSidebar', 6)->get();
+            $menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
             $sidebars = Sidebar::where('status', 0)->get();
             $categorys = Category::where('status', 0)->get();
             $categorys_2 = Category::where('status', 1)->get();
@@ -60,7 +63,10 @@ public function getPracticeWritings($slug,Request $request){
      if ($request->user()->authorizeRoles(['employee', 'admin'])) { 
 
         $address = Address::first();
-        $menus = Category::where('idSidebar', 6)->get();
+        $menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();
@@ -97,7 +103,10 @@ public function getpracticeListening($slug,Request $request){
      if ($request->user()->authorizeRoles(['employee', 'admin'])) { 
 
         $address = Address::first();
-        $menus = Category::where('idSidebar', 6)->get();
+        $menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();
@@ -134,7 +143,10 @@ public function getQuizz($slug,Request $request){
      if ($request->user()->authorizeRoles(['employee', 'admin'])) { 
 
         $address = Address::first();
-        $menus = Category::where('idSidebar', 6)->get();
+        $menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();

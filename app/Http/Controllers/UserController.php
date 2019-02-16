@@ -27,7 +27,10 @@ class UserController extends Controller
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();
-        $menus = Category::where('idSidebar', 6)->get();
+        $menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
         return view('page.registration',compact('news','sidebars','categorys','categorys_2','menus','address'));
     }
 
@@ -37,7 +40,10 @@ class UserController extends Controller
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();
-        $menus = Category::where('idSidebar', 6)->get();
+        $menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
         return view('page.login',compact('news','sidebars','categorys','categorys_2','menus','address'));
     }
 
@@ -137,7 +143,10 @@ class UserController extends Controller
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();
-        $menus = Category::where('idSidebar', 6)->get();
+        $menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
         return view('page.money',compact('news','sidebars','categorys','categorys_2','menus','address'));
     }
 
@@ -147,7 +156,10 @@ class UserController extends Controller
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();
-        $menus = Category::where('idSidebar', 6)->get();
+        $menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
         $date = $slug;
         return view('page.extension',compact('news','sidebars','categorys','categorys_2','menus','date','address'));
     }
@@ -158,7 +170,10 @@ class UserController extends Controller
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();
-        $menus = Category::where('idSidebar', 6)->get();
+        $menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
         return view('page.recharge',compact('news','sidebars','categorys','categorys_2','menus','address'));
     }
 

@@ -20,13 +20,19 @@ class HomeController extends Controller
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();
-        $menus = Category::where('idSidebar', 6)->get();
+        $menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
         return view('page.home',compact('news','sidebars','categorys','categorys_2','menus','address'));
     }
 
     public function getDetail($slug){
          $address = Address::first();
-    	$menus = Category::where('idSidebar', 6)->get();
+    	$menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();
@@ -40,7 +46,10 @@ class HomeController extends Controller
 
     public function getQuesetion($slug){
          $address = Address::first();
-    	$menus = Category::where('idSidebar', 6)->get();
+    	$menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
+        ->select('category.*')
+        ->where('sidebar.title','menu')
+        ->get();
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
         $categorys_2 = Category::where('status', 1)->get();

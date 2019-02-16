@@ -299,7 +299,7 @@ class AdminController extends Controller
 	public function postMenu(Request $req)
 		{
 			$menu = new Menu;
-	        $menu->Title = $req->title;
+	        $menu->title = $req->title;
 	        $menu->slug = $req->slug;
 	        $menu->save();
 	        return redirect()->route('adminGetSidebar');
