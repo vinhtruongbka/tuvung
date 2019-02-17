@@ -15,7 +15,7 @@ use App\Address;
 class HomeController extends Controller
 {
     public function getIndex(){
-        $news = News::all();
+        $news = News::orderBy('id', 'desc')->get();
         $address = Address::first();
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
