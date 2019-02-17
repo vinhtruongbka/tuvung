@@ -6,7 +6,7 @@
           <?php if ($desc !=null): ?>
             <div class="desn"><div class="show_title_new"><h1>{{$desc->newsTitle}}</h1></div>
                 <div class="show_content_new">
-                    {{$desc->content}}
+                    {!!$desc->content!!}
                 </div>
             </div>
           <?php elseif($desc2 !=null): ?>
