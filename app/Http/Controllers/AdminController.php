@@ -48,7 +48,7 @@ class AdminController extends Controller
 			
 			return view('backend.page.err');
 		}
-	public function getProfile()
+	public function getProfile(Request $request)
 		{	
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
@@ -57,7 +57,7 @@ class AdminController extends Controller
 				return redirect()->intended('/admin/login');
 			}
 		}
-	public function getAddress()
+	public function getAddress(Request $request)
 		{	
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
@@ -67,7 +67,7 @@ class AdminController extends Controller
 				return redirect()->intended('/admin/login');
 			}
 		}
-	public function getPassword()
+	public function getPassword(Request $request)
 		{	
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
@@ -77,7 +77,7 @@ class AdminController extends Controller
 			}
 			
 		}
-	public function getFile()
+	public function getFile(Request $request)
 		{	
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
@@ -88,7 +88,7 @@ class AdminController extends Controller
 			
 		}
 
-	public function getCategory()
+	public function getCategory(Request $request)
 		{	
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
@@ -104,7 +104,7 @@ class AdminController extends Controller
 			}
 		}
 
-	public function getSidebar()
+	public function getSidebar(Request $request)
 		{	
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
@@ -116,7 +116,7 @@ class AdminController extends Controller
 			
 		}
 
-	public function getMenu()
+	public function getMenu(Request $request)
 		{	
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
@@ -128,7 +128,7 @@ class AdminController extends Controller
 			
 		}
 
-	public function getPost()
+	public function getPost(Request $request)
 		{	
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
@@ -139,7 +139,7 @@ class AdminController extends Controller
 			}
 			
 		}
-	public function getEditPost($slug)
+	public function getEditPost($slug,Request $request)
 		{
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
@@ -154,7 +154,7 @@ class AdminController extends Controller
 			}
 			
 		}
-	public function getListPost()
+	public function getListPost(Request $request)
 		{	
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
