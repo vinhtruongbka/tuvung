@@ -23,7 +23,7 @@ class VocabularyTableSeeder extends Seeder
 
     	for ($i=0; $i < 66; $i++) { 
     		$vocabulary = new Vocabulary;
-			$vocabulary->idCategorychi = 3;
+			$vocabulary->idCategorychi = 1;
 			$vocabulary->audio = '0 - Copy ('.$i.').mp3';
 			$vocabulary->images = $i.'.png';
 			$vocabulary->vietnamtrue = $vietnamtrue[$i];
