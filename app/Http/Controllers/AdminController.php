@@ -212,7 +212,7 @@ class AdminController extends Controller
 
 	public function getCategoryList()
 		{	
-			 $categorys = Category::where('status','0');
+			 $categorys = Category::where('status','0')->get();
 			 $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
 			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.title as categoryTitle','categorychi.idCategory')
 			 ->get();
