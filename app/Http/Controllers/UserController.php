@@ -98,6 +98,7 @@ class UserController extends Controller
            $user->password = bcrypt($req->rg_password);
            $user->sex = $rg_sex_select;
            $user->birth = $birth;
+           $user->money = 0;
            $user->save();
            $user->roles()->attach($role_saler);
 
