@@ -44,7 +44,7 @@ class PageController extends Controller
             ->where('categorychi.slug',$slug2)
             ->where('category.status',0)
             ->first();
-            return view('page.LearningWords',compact('sidebars','categorys','categorys_2','menus','desc','desc2','address'));
+            return view('page.learningWords',compact('sidebars','categorys','categorys_2','menus','desc','desc2','address'));
         } else {
          return redirect()->route('home.getMoney');
      }
