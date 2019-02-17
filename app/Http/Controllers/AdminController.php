@@ -69,7 +69,7 @@ class AdminController extends Controller
 
 	public function getCategory()
 		{	
-			$sidebars = Sidebar::where('status','1');
+			$sidebars = Sidebar::all();
 			$desc = DB::table('sidebar')->join('category', 'sidebar.id', '=', 'category.idSidebar')
 			 ->select('category.*','sidebar.title as sidebarTitle')
 			 ->get();
@@ -212,7 +212,7 @@ class AdminController extends Controller
 
 	public function getCategoryList()
 		{	
-			 $categorys = Category::all();
+			 $categorys = Category::where('status','0');
 			 $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
 			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.title as categoryTitle','categorychi.idCategory')
 			 ->get();
