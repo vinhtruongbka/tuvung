@@ -119,7 +119,7 @@ public function getpracticeListening($slug,Request $request){
         ->get();
         $desc2 = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
         ->join('vocabulary', 'vocabulary.idCategorychi', '=', 'categorychi.id')
-        ->select('categorychi.Title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*','category.slug as categorySlug')
+        ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','vocabulary.*','category.slug as categorySlug')
         ->where('categorychi.slug',$slug)
         ->where('category.status',0)
         ->first();
