@@ -72,7 +72,7 @@ class AdminController extends Controller
 			$sidebars = Sidebar::all();
 			$desc = DB::table('sidebar')->join('category', 'sidebar.id', '=', 'category.idSidebar')
 			 ->select('category.*','sidebar.title as sidebarTitle')
-			 ->orderBy('id', 'desc')
+			 ->orderBy('category.id', 'desc')
 			 ->get();
 
 			return view('backend.page.category',compact('sidebars','desc'));
@@ -108,7 +108,7 @@ class AdminController extends Controller
 		{	
 			 $news = DB::table('news')->join('category', 'category.id', '=', 'news.idCategory')
 			 ->select('news.*','category.title as categoryTitle')
-			 ->orderBy('id', 'desc')
+			 ->orderBy('news.id', 'desc')
 			 ->get();
 			return view('backend.page.postList',compact('news'));
 		}
@@ -208,7 +208,7 @@ class AdminController extends Controller
 		{	
 			  $desc = DB::table('categorychi')->join('vocabulary', 'categorychi.id', '=', 'vocabulary.idCategorychi')
 			 ->select('categorychi.title as categorychiTitle','vocabulary.*')
-			 ->orderBy('id', 'desc')
+			 ->orderBy('categorychi.id', 'desc')
 			 ->get();
 			return view('backend.page.VocabularyList',compact('desc'));
 		}
@@ -218,7 +218,7 @@ class AdminController extends Controller
 			 $categorys = Category::where('status','0')->get();
 			 $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
 			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.title as categoryTitle','categorychi.idCategory')
-			 ->orderBy('id', 'desc')
+			 ->orderBy('categorychi.id', 'desc')
 			 ->get();
 			return view('backend.page.categoryList',compact('categorys','desc'));
 		}
