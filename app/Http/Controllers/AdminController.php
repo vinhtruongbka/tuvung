@@ -69,7 +69,7 @@ class AdminController extends Controller
 
 	public function getCategory()
 		{	
-			$sidebars = Sidebar::all();
+			$sidebars = Sidebar::where('status','1');
 			$desc = DB::table('sidebar')->join('category', 'sidebar.id', '=', 'category.idSidebar')
 			 ->select('category.*','sidebar.title as sidebarTitle')
 			 ->get();
