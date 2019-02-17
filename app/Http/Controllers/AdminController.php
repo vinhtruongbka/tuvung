@@ -50,67 +50,123 @@ class AdminController extends Controller
 		}
 	public function getProfile()
 		{	
-			return view('backend.page.profile');
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				
+				return view('backend.page.profile');
+			} else {
+				return redirect()->intended('/admin/login');
+			}
 		}
 	public function getAddress()
 		{	
-			$address = Address::first();
-			return view('backend.page.address',compact('address'));
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				
+				$address = Address::first();
+				return view('backend.page.address',compact('address'));
+			} else {
+				return redirect()->intended('/admin/login');
+			}
 		}
 	public function getPassword()
 		{	
-			return view('backend.page.password');
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				
+				return view('backend.page.password');
+			} else {
+				return redirect()->intended('/admin/login');
+			}
+			
 		}
 	public function getFile()
 		{	
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				
+				return view('backend.page.file');
+			} else {
+				return redirect()->intended('/admin/login');
+			}
 			
-			return view('backend.page.file');
 		}
 
 	public function getCategory()
 		{	
-			$sidebars = Sidebar::all();
-			$desc = DB::table('sidebar')->join('category', 'sidebar.id', '=', 'category.idSidebar')
-			 ->select('category.*','sidebar.title as sidebarTitle')
-			 ->orderBy('category.id', 'desc')
-			 ->get();
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				
+				$sidebars = Sidebar::all();
+				$desc = DB::table('sidebar')->join('category', 'sidebar.id', '=', 'category.idSidebar')
+				 ->select('category.*','sidebar.title as sidebarTitle')
+				 ->orderBy('category.id', 'desc')
+				 ->get();
 
-			return view('backend.page.category',compact('sidebars','desc'));
+				return view('backend.page.category',compact('sidebars','desc'));
+			} else {
+				return redirect()->intended('/admin/login');
+			}
 		}
 
 	public function getSidebar()
 		{	
-			$sidebars = Sidebar::where('status','0')->get();
-			return view('backend.page.addSidebar',compact('sidebars'));
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				
+				$sidebars = Sidebar::where('status','0')->get();
+				return view('backend.page.addSidebar',compact('sidebars'));
+			} else {
+				return redirect()->intended('/admin/login');
+			}
+			
 		}
 
 	public function getMenu()
 		{	
-			$sidebars = Sidebar::all();
-			return view('backend.page.addMenu',compact('sidebars'));
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				
+				$sidebars = Sidebar::all();
+				return view('backend.page.addMenu',compact('sidebars'));
+			} else {
+				return redirect()->intended('/admin/login');
+			}
+			
 		}
 
 	public function getPost()
 		{	
-			 $categorys = Category::where('status','1')->orWhere('status','2')->get();
-			return view('backend.page.post',compact('categorys'));
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				
+				 $categorys = Category::where('status','1')->orWhere('status','2')->get();
+				return view('backend.page.post',compact('categorys'));
+			} else {
+				return redirect()->intended('/admin/login');
+			}
+			
 		}
 	public function getEditPost($slug)
 		{
-			$categorys = Category::where('status','1')->orWhere('status','3')->get();
-			$news = DB::table('news')->join('category', 'category.id', '=', 'news.idCategory')
-			 ->select('news.*','category.title as categoryTitle')
-			 ->where('news.slug',$slug)
-			 ->first();
-			return view('backend.page.editPost',compact('news','categorys'));
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				
+				$categorys = Category::where('status','1')->orWhere('status','3')->get();
+				$news = DB::table('news')->join('category', 'category.id', '=', 'news.idCategory')
+				 ->select('news.*','category.title as categoryTitle')
+				 ->where('news.slug',$slug)
+				 ->first();
+				return view('backend.page.editPost',compact('news','categorys'));
+			} else {
+				return redirect()->intended('/admin/login');
+			}
+			
 		}
 	public function getListPost()
 		{	
-			 $news = DB::table('news')->join('category', 'category.id', '=', 'news.idCategory')
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				
+				 $news = DB::table('news')->join('category', 'category.id', '=', 'news.idCategory')
 			 ->select('news.*','category.title as categoryTitle')
 			 ->orderBy('news.id', 'desc')
 			 ->get();
 			return view('backend.page.postList',compact('news'));
+			} else {
+				return redirect()->intended('/admin/login');
+			}
+			
 		}
 
 		public function updateNews(Request $req)
