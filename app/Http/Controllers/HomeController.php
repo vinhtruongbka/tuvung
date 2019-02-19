@@ -16,7 +16,6 @@ use App\Useronline;
 class HomeController extends Controller
 {
     public function getIndex(Request $request){
-        dd(get_user_ip());
         $news = News::orderBy('id', 'desc')->get();
         $address = Address::first();
         $sidebars = Sidebar::where('status', 0)->get();

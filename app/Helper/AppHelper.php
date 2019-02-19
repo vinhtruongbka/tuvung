@@ -49,7 +49,7 @@ function randomVietnam($answer,$arrayAnswer,$keyString){
 
   function countView()
   {
-    $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = get_user_ip();
     $user_ip = Useronline::where('ip',$ip)->first();
     $tg=time();
     $tgout=900;
