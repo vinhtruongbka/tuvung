@@ -13,17 +13,17 @@ class CreateNewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('idCategory');
-            $table->string('title', 255);
-            $table->string('slug', 255);
-            $table->text('desc');
-            $table->string('images', 100);
-            $table->text('content');
-            $table->integer('status')->default(0);
-            $table->timestamps();
-        });
+        // Schema::create('news', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('idCategory');
+        //     $table->string('title', 255);
+        //     $table->string('slug', 255);
+        //     $table->text('desc');
+        //     $table->string('images', 100);
+        //     $table->text('content');
+        //     $table->integer('status')->default(0);
+        //     $table->timestamps();
+        // });
     }
 
     /**

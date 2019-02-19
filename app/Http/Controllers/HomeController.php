@@ -11,11 +11,12 @@ use App\Sidebar;
 use App\Category;
 use App\Vocabulary;
 use App\Address;
+use App\Useronline;
 
 class HomeController extends Controller
 {
     public function getIndex(Request $request){
-        dd($request->ip());
+        dd($ip_address = $_SERVER['REMOTE_ADDR']);
         $news = News::orderBy('id', 'desc')->get();
         $address = Address::first();
         $sidebars = Sidebar::where('status', 0)->get();

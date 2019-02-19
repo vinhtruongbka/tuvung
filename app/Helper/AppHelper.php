@@ -1,4 +1,9 @@
 <?php 
+use App\Useronline;
+use App\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 function fooBar(){
         return 'it works!';
     }
@@ -28,5 +33,31 @@ function randomVietnam($answer,$arrayAnswer,$keyString){
       }
       return $answersValue;
 	}
+
+  function countView($ip)
+  {
+    $user_ip = Useronline::where('ip',$ip)->first();
+    $tg=time();
+    $tgout=900;
+    $tgnew=$tg - $tgout;
+
+    if ($user_ip == null) {
+      $useronline = new Useronline();
+      $useronline->ip = $ip;
+      $useronline->tgtmp = $tg;
+      $useronline->save();
+    } else {
+       DB::table('useronline')
+        ->where('ip', $ip)
+        ->update([
+          'tgtmp' => $tg,
+        ]);
+    };
+    Useronline::where('tgtmp','<',$tgnew)->delete();
+
+    $countView = Useronline::where('tgtmp','>',$tgnew)->count();
+    
+    return $countView;
+  }
 
 ?>
