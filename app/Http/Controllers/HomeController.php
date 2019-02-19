@@ -14,7 +14,8 @@ use App\Address;
 
 class HomeController extends Controller
 {
-    public function getIndex(){
+    public function getIndex(Request $request){
+        dd($request->ip());
         $news = News::orderBy('id', 'desc')->get();
         $address = Address::first();
         $sidebars = Sidebar::where('status', 0)->get();

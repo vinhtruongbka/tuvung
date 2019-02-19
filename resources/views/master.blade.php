@@ -32,7 +32,7 @@
 </head>
 <body>
  <!--start menu-->
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#2F4F4F;border-color: #2F4F4F">
       @include('header')
     </nav>
     <!--and menu-->
