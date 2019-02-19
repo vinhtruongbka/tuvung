@@ -52,7 +52,7 @@ function randomVietnam($answer,$arrayAnswer,$keyString){
     $ip = get_user_ip();
     $user_ip = Useronline::where('ip',$ip)->first();
     $tg=time();
-    $tgout=900;
+    $tgout=10;
     $tgnew=$tg - $tgout;
     $tgDelete = $tg - 86400;
 
