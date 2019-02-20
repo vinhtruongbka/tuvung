@@ -18,21 +18,6 @@
                 <a href='{{ route('home.Quesetion',$menu->slug)}}'>{{$menu->title}}</a>
             </li>
             @endforeach
-            @if (Auth::check())
-                <li>
-                    <a href='{{ route('home.getMoney')}}'>Quản trị</a>
-                </li>
-                <li>
-                    <a href='{{ route('postLogout')}}'>Đăng xuất</a>
-                </li>
-            @else
-                <li>
-                    <a href='{{ route('home.getRegisration')}}'>Đăng ký</a>
-                </li>
-                <li>
-                    <a href='{{ route('getLogin')}}'>Đăng nhập</a>
-                </li>
-            @endif
         </ul>
     </div><!--/.nav-collapse -->
 </div>

@@ -2,6 +2,8 @@
 @section('content')
 <div class="row ali">
    <div class="col-xs-12 col-md-9">
+    <img src="uploads/tieng-anh-giao-tiep-hai-phong-01.jpg" class="img-responsive" alt="Image" style="max-width: 100% !important">
+    <hr /> 
  <!--<h2 class="main">Danh sách tham khỏa </h2>-->
     <?php foreach ($news as $new): ?>
     <div class="pageindex">
