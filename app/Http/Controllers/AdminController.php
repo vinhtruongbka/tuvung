@@ -171,63 +171,83 @@ class AdminController extends Controller
 
 		public function updateNews(Request $req)
 		{	
-			$link =$req->images;
-			$base_url =  asset('')."uploads/";
-			$images = str_replace($base_url,"",$link);
-			 DB::table('news')
-			    ->where('id', $req->idNews)
-			    ->update([
-			   		'title' => $req->title,
-			        'slug' => $req->slug,
-			        'desc' => $req->desc,
-			        'content' => $req->content,
-			        'images' => $images,
-			        'idCategory' => $req->idCategory,
-			   	]);
-			return redirect()->route('admin.getListPost');
+			if (Auth::check() && $req->user()->authorizeRoles( 'admin')) {
+
+				$link =$req->images;
+				$base_url =  asset('')."uploads/";
+				$images = str_replace($base_url,"",$link);
+				 DB::table('news')
+				    ->where('id', $req->idNews)
+				    ->update([
+				   		'title' => $req->title,
+				        'slug' => $req->slug,
+				        'desc' => $req->desc,
+				        'content' => $req->content,
+				        'images' => $images,
+				        'idCategory' => $req->idCategory,
+				   	]);
+				return redirect()->route('admin.getListPost');
+			}
 		}
 
 		public function updateAddress(Request $req)
 		{	
-			$link =$req->images;
-			$base_url =  asset('')."uploads/";
-			$images = str_replace($base_url,"",$link);
-			 DB::table('address')
-			    ->where('id', $req->id)
-			    ->update([
-			        'content' => $req->desc,
-			        'images' => $images,
-			   	]);
-			return redirect()->route('admin.getAddress');
+			if (Auth::check() && $req->user()->authorizeRoles( 'admin')) {
+
+				$link =$req->images;
+				$base_url =  asset('')."uploads/";
+				$images = str_replace($base_url,"",$link);
+				 DB::table('address')
+				    ->where('id', $req->id)
+				    ->update([
+				        'content' => $req->desc,
+				        'images' => $images,
+				   	]);
+				return redirect()->route('admin.getAddress');
+				} else {
+				return redirect()->intended('/admin/login');
+			}
 		}
 
 		public function updateUser(Request $req)
 		{	
-			$user = User::find($req->idUser);
-			$money = $user->money + $req->money;
-			 DB::table('users')
-			    ->where('id', $req->idUser)
-			    ->update([
-			   		'money' => $money
-			   	]);
-			return redirect()->route('admin.index');
+			if (Auth::check() && $req->user()->authorizeRoles( 'admin')) {
+
+				$user = User::find($req->idUser);
+				$money = $user->money + $req->money;
+				 DB::table('users')
+				    ->where('id', $req->idUser)
+				    ->update([
+				   		'money' => $money
+				   	]);
+				return redirect()->route('admin.index');
+				} else {
+				return redirect()->intended('/admin/login');
+			}
+			
 		}
 
 		public function updateAdmin(Request $req)
 		{	
-			$link =$req->images;
-			$base_url =  asset('')."uploads/";
-			$images = str_replace($base_url,"",$link);
-			 DB::table('users')
-			    ->where('id', $req->id)
-			    ->update([
-			   		'name' => $req->name,
-			   		'email' => $req->email,
-			   		'birth' => date('Y-m-d',strtotime($req->birth)),
-			   		'sex' => $req->sex,
-			   		'images' => $images,
-			   	]);
-			return redirect()->route('admin.getProfile');
+			if (Auth::check() && $req->user()->authorizeRoles( 'admin')) {
+
+					$link =$req->images;
+					$base_url =  asset('')."uploads/";
+					$images = str_replace($base_url,"",$link);
+					 DB::table('users')
+					    ->where('id', $req->id)
+					    ->update([
+					   		'name' => $req->name,
+					   		'email' => $req->email,
+					   		'birth' => date('Y-m-d',strtotime($req->birth)),
+					   		'sex' => $req->sex,
+					   		'images' => $images,
+					   	]);
+					return redirect()->route('admin.getProfile');
+				} else {
+				return redirect()->intended('/admin/login');
+			}
+			
 		}
 		public function updatePassword(Request $req)
 		{	
@@ -241,11 +261,15 @@ class AdminController extends Controller
 			   	]);
 			return redirect()->route('admin.getProfile');
 		}
-		public function getEditUser($id)
+		public function getEditUser($id,Request $request)
 		{	
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				$user = User::where('users.id',$id)->first();
+      			return $user;
+				} else {
+				return redirect()->intended('/admin/login');
+			}
 			
-			$user = User::where('users.id',$id)->first();
-      		return $user;
 		}
 
 		public function deleteNews($id)
@@ -260,42 +284,64 @@ class AdminController extends Controller
 			return redirect()->route('admin.index');
 		}
 
-	public function getVocabularyList()
+	public function getVocabularyList(Request $request)
 		{	
-			  $desc = DB::table('categorychi')->join('vocabulary', 'categorychi.id', '=', 'vocabulary.idCategorychi')
-			 ->select('categorychi.title as categorychiTitle','vocabulary.*')
-			 ->orderBy('categorychi.id', 'desc')
-			 ->get();
-			return view('backend.page.VocabularyList',compact('desc'));
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+
+				$desc = DB::table('categorychi')->join('vocabulary', 'categorychi.id', '=', 'vocabulary.idCategorychi')
+				 ->select('categorychi.title as categorychiTitle','vocabulary.*')
+				 ->orderBy('categorychi.id', 'desc')
+				 ->get();
+				return view('backend.page.VocabularyList',compact('desc'));
+				} else {
+				return redirect()->intended('/admin/login');
+				}
+			 
 		}
 
-	public function getCategoryList()
+	public function getCategoryList(Request $request)
 		{	
-			 $categorys = Category::where('status','0')->get();
-			 $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
-			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.title as categoryTitle','categorychi.idCategory')
-			 ->orderBy('categorychi.id', 'desc')
-			 ->get();
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+
+				$categorys = Category::where('status','0')->get();
+				$desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
+				->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.title as categoryTitle','categorychi.idCategory')
+				->orderBy('categorychi.id', 'desc')
+				->get();
 			return view('backend.page.categoryList',compact('categorys','desc'));
+				} else {
+			return redirect()->intended('/admin/login');
+			}
+			 
 		}
 
-	public function getCategoryListDetail($id)
+	public function getCategoryListDetail($id,Request $request)
 		{	
-			 $desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
-			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.title as categoryTitle','categorychi.idCategory')
-			 ->where('categorychi.id',$id)
-			 ->first();
-			  $categorys = Category::all();
-			$data = array('desc' => $desc,'categorys'=>$categorys);
-      		return $data;
-		}
-
-	public function getIdSidebar($id)
-		{	
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				$desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
+				->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug','category.title as categoryTitle','categorychi.idCategory')
+				->where('categorychi.id',$id)
+				->first();
+				$categorys = Category::all();
+				$data = array('desc' => $desc,'categorys'=>$categorys);
+				return $data;
+				} else {
+				return redirect()->intended('/admin/login');
+			}
 			
-			 $sidebar = Sidebar::where('sidebar.id',$id)->first();
-			$data = array('sidebar'=>$sidebar);
-      		return $data;
+		}
+
+	public function getIdSidebar($id,Request $request)
+		{	
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+
+				 $sidebar = Sidebar::where('sidebar.id',$id)->first();
+				$data = array('sidebar'=>$sidebar);
+	      		return $data;
+			} else {
+				return redirect()->intended('/admin/login');
+			}
+			
 		}
 
 	public function getIdCategory($id)
@@ -364,14 +410,20 @@ class AdminController extends Controller
 	        return redirect()->route('adminGetSidebar');
 		}
 
-		public function getQuesetion()
+		public function getQuesetion(Request $request)
 		{	
-			$categorys = Category::where('status', 0)->get();
-			$desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
-			 ->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug')
-			 ->where('category.status',0)
-			 ->get();
-			return view('backend.page.question',compact('categorys','desc'));
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+
+				$categorys = Category::where('status', 0)->get();
+				$desc = DB::table('categorychi')->join('category', 'categorychi.idCategory', '=', 'category.id')
+				->select('categorychi.title as categorychiTitle','categorychi.slug as categorychiSlug','categorychi.id as categorychiId','category.slug as categorySlug')
+				->where('category.status',0)
+				->get();
+				return view('backend.page.question',compact('categorys','desc'));
+	      		return $data;
+			} else {
+				return redirect()->intended('/admin/login');
+			}
 		}
 
 			public function postQuesetion(Request $req)
@@ -387,9 +439,25 @@ class AdminController extends Controller
 		}
 
 			public function postLearningWords(Request $req)
-		{				
-			$data = array();
+		{	
+			// $this->validate($req, 
+			// 	[	
+			// 		'vietnamtrue' =>'required',
+			// 		'koreantrue' =>'required',
+			// 		'images' => 'required|mimes:jpg,jpeg,png,gif',
+			// 		'audio' => 'required|mimes:mp3',
+			// 	],			
+			// 	[	
+			// 		'vietnamtrue.required' => 'Bạn cần tiếng việt',
+			// 		'koreantrue.required' => 'Bạn cần nhập tiếng hàn',
+			// 		'images.required' => 'Bạn cần nhập hình ảnh',
+			// 		'images.mimes' => 'Chỉ chấp nhận hình ảnh với đuôi .jpg .jpeg .png .gif',
+			// 		'audio.required' => 'Bạn cần nhập hình ảnh',
+			// 		'audio.mimes' => 'Chỉ chấp nhận hình ảnh với đuôi .jpg .jpeg .png .gif',
 
+			// 	]
+			// );			
+			$data = array();
 			    for ($i=0; $i <6 ; $i++) {
 			    	$audio = 'audio'.$i;
 			    	$images = 'images'.$i;
