@@ -45,9 +45,9 @@
  <div class="sid"><!--Start bside 1-->
     <h2 style="background-color: #2F4F4F;color: #fff">ĐẾM SỐ NGƯỜI TRUY CẬP</h2>
           <ul class="ul_online">
-          <li class="online"><p> Đang truy cập: {{ $visit['countView'] }} </p></li>
-          <li class="tuantruoc"><p>Đầu ngày tới giờ:  {{ $visit['countDay'] }} </p></li>
-          <li class="tuannay"><p>Truy cập hôm qua:  {{ $visit['yesterday'] }} </p></li>
+          <li class=""><p> Đang truy cập: {{ $visit['countView'] }} </p></li>
+          <li class=""><p>Đầu ngày tới giờ:  {{ $visit['countDay'] }} </p></li>
+          <li class=""><p>Truy cập hôm qua:  {{ $visit['yesterday'] }} </p></li>
           <!--<li class="tatca"><p>Tổng số người dùng:7,899   </p></li>
           <li class="thangtruoc"><p>Trung bình:   </p></li>-->
     </ul>
