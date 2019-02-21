@@ -32,7 +32,8 @@
 </style>-->
 </head>
 <body>
- <!--start menu-->
+  <div id="fb-root"></div>
+<script async defer src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2"></script> <!--start menu-->
   <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#2F4F4F;border-color: #2F4F4F">
       @include('header')
     </nav>

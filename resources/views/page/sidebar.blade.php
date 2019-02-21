@@ -52,3 +52,8 @@
           <li class="thangtruoc"><p>Trung bình:   </p></li>-->
     </ul>
 </div>
+<div class="side">
+    <h2>THEO DÕI MẠNG XÃ HỘI</h2>
+        <div class="fb-like" data-href="https://www.facebook.com/muasamthachthat/" data-width="268" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+
+    </div>
