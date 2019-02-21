@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+    {{-- //secure_ --}}
     <!--quang cao-->
     <meta charset='UTF-8' />
     <title>Học tiếng hàn online tại nhà quá trình học có luyện phát âm chuẩn</title>
-    <base href="{{secure_asset('')}}">
+    <base href="{{asset('')}}">
     <link rel="Shortcut Icon" href="https://tuvungtienghan.com/themes/favicon.ico" type="image/x-icon" /> 
     <!--start boottrap-->
     <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -29,7 +29,7 @@ h2.main{background: #ccc;text-align: left; line-height: 2.5em; color: #A80010; f
 #aside .side p {background: #fff; padding: 0px 10px;}
 #aside .side ul {margin: 0; padding:5px 10px 20px 10px; background: #fff;}
 #aside .side ul li{display: inline;}
-#aside .side ul li a{display: block; color: #000; text-decoration: none; background: #fff; border-bottom:1px dashed #ccc;}
+#aside .side ul li a{display: block; color: #000; text-decoration: none; background: #fff;}
 #aside .side ul li a:hover { color: #0D00A8;}
 
 #aside .side ul.ul_side {margin: 0; padding:5px 8px 20px 8px; background: #fff;}

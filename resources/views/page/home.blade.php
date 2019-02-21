@@ -34,8 +34,11 @@
                 {!!$new ->desc!!}
             </div>
         </div> --}}
+
     </div>
-   
+   <div class="text-center">
+       {!! $news->links() !!}
+   </div>
 <hr />   
   </div>
 <div class="col-xs-12 col-md-3">
