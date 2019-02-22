@@ -52,7 +52,7 @@ function randomVietnam($answer,$arrayAnswer,$keyString){
     $tgnew=$tg - $tgout;
     $tgDelete = $tg - 86400;
 
-    if ($user_ip == null || $user_ip->tgtmp < $tgnew) {
+    if ($user_ip == null) {
       $useronline = new Useronline();
       $useronline->ip = $ip;
       $useronline->tgtmp = $tg;
