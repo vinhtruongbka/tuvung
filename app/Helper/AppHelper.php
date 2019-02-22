@@ -72,10 +72,11 @@ function randomVietnam($answer,$arrayAnswer,$keyString){
     $last_visit_yesterday = date('z', $useronline_visit->tgtmp);
     $last_visit_year = date('Y', $useronline_visit->tgtmp);
     $today = date('z') + 1;
+    $todayLast = date('z');
     $yearDay = date('Y');
 
     $countDay = Useronline::whereRaw($last_visit_day.' = '.$today.' AND '.$last_visit_year.' = '.$yearDay)->count();
-    $yesterday = Useronline::whereRaw($last_visit_yesterday.' = '.$today.' AND '.$last_visit_year.' = '.$yearDay)->count();
+    $yesterday = Useronline::whereRaw($last_visit_yesterday.' = '.$todayLast.' AND '.$last_visit_year.' = '.$yearDay)->count();
     $visits = array('countDay' => $countDay,'yesterday'=>$yesterday,'countView'=>$countView );
     return $visits;
   }
