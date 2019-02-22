@@ -69,14 +69,13 @@ function randomVietnam($answer,$arrayAnswer,$keyString){
     $useronline_visit = Useronline::where('ip',$ip)->first();
     $countView = Useronline::where('tgtmp','>',$tgnew)->count();
     $last_visit_day = date('z', $useronline_visit->tgtmp)+1;
-    $last_visit_yesterday = date('z', $useronline_visit->tgtmp);
     $last_visit_year = date('Y', $useronline_visit->tgtmp);
     $today = date('z') + 1;
     $todayLast = date('z');
     $yearDay = date('Y');
 
     $countDay = Useronline::whereRaw($last_visit_day.' = '.$today.' AND '.$last_visit_year.' = '.$yearDay)->count();
-    $yesterday = Useronline::whereRaw($last_visit_yesterday.' = '.$todayLast.' AND '.$last_visit_year.' = '.$yearDay)->count();
+    $yesterday = Useronline::whereRaw($last_visit_day.' = '.$todayLast.' AND '.$last_visit_year.' = '.$yearDay)->count();
     $visits = array('countDay' => $countDay,'yesterday'=>$yesterday,'countView'=>$countView );
     return $visits;
   }
