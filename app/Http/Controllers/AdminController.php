@@ -143,7 +143,7 @@ class AdminController extends Controller
 		{
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
-				$categorys = Category::where('status','1')->orWhere('status','3')->get();
+				$categorys = Category::where('status','1')->orWhere('status','2')->get();
 				$news = DB::table('news')->join('category', 'category.id', '=', 'news.idCategory')
 				 ->select('news.*','category.title as categoryTitle')
 				 ->where('news.slug',$slug)
