@@ -48,7 +48,7 @@ function randomVietnam($answer,$arrayAnswer,$keyString){
     $ip = get_user_ip();
     $user_ip = Useronline::where('ip',$ip)->first();
     $tg=time();
-    $tgout=180;
+    $tgout=900;
     $tgnew=$tg - $tgout;
     $tgDelete = $tg - 86400;
 
@@ -57,9 +57,7 @@ function randomVietnam($answer,$arrayAnswer,$keyString){
       $useronline->ip = $ip;
       $useronline->tgtmp = $tg;
       $useronline->save();
-
-    }
-    else {
+    } else {
        DB::table('useronline')
         ->where('ip', $ip)
         ->update([
@@ -69,15 +67,15 @@ function randomVietnam($answer,$arrayAnswer,$keyString){
     Useronline::where('tgtmp','<',$tgDelete)->delete();
 
     $useronline_visit = Useronline::where('ip',$ip)->first();
-    $countView = Useronline::where('tgtmp','>',$tgnew)->count('id');
+    $countView = Useronline::where('tgtmp','>',$tgnew)->count();
     $last_visit_day = date('z', $useronline_visit->tgtmp)+1;
     $last_visit_year = date('Y', $useronline_visit->tgtmp);
     $today = date('z') + 1;
     $todayLast = date('z');
     $yearDay = date('Y');
 
-    $countDay = Useronline::whereRaw($last_visit_day.' = '.$today.' AND '.$last_visit_year.' = '.$yearDay)->count('id');
-    $yesterday = Useronline::whereRaw($last_visit_day.' = '.$todayLast.' AND '.$last_visit_year.' = '.$yearDay)->count('id');
+    $countDay = Useronline::whereRaw($last_visit_day.' = '.$today.' AND '.$last_visit_year.' = '.$yearDay)->count();
+    $yesterday = Useronline::whereRaw($last_visit_day.' = '.$todayLast.' AND '.$last_visit_year.' = '.$yearDay)->count();
     $visits = array('countDay' => $countDay,'yesterday'=>$yesterday,'countView'=>$countView );
     return $visits;
   }
