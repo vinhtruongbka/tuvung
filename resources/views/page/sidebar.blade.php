@@ -52,8 +52,8 @@
           <li class="thangtruoc"><p>Trung bình:   </p></li>-->
     </ul>
 </div>
-<div class="side" style="margin-top: 20px">
+<div class="side" style="margin-top: 15px;">
     <h2 style="background-color: #2F4F4F;color: #fff">THEO DÕI MẠNG XÃ HỘI</h2>
-        <div class="fb-like" data-href="https://www.facebook.com/muasamthachthat/" data-width="40"  data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+        <div class="fb-like" data-href="https://www.facebook.com/muasamthachthat/" data-width="40" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true" style="height: 80px"></div>
 
     </div>
