@@ -16,8 +16,8 @@
     <!--and boottrap-->
     <link rel="stylesheet" href="public/source/css/miniplayer.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="public/source/css/mp3_player.css" type="text/css" media="screen" />
-  {{--  <link rel="stylesheet" href="public/source/css/noview.css" type="text/css" media="screen" /> --}}
-    {{-- <script type="text/javascript" charset="utf-8" src="public/source/js/noview.js"></script> --}}
+   <link rel="stylesheet" href="public/source/css/noview.css" type="text/css" media="screen" />
+    <script type="text/javascript" charset="utf-8" src="public/source/js/noview.js"></script>
     <script type="text/javascript" charset="utf-8" src="public/source/js/jquery-1.11.1min.js"></script>
     <script type="text/javascript" charset="utf-8" src="public/source/js/audio_test_clicks.js"></script>
     <!-- <script type="text/javascript" charset="utf-8" src="public/source/js/menuHome.js"></script> -->
