@@ -23,7 +23,6 @@ class UserController extends Controller
 {
 	public function getRegisration(){
         $address = Address::first();
-        dd($address);
         $news = News::all();
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
