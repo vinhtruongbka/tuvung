@@ -17,7 +17,6 @@ class HomeController extends Controller
 {
     public function getIndex(Request $request){
         $news = News::orderBy('id', 'desc')->paginate(20);
-        dd($news);
         $address = Address::first();
         $sidebars = Sidebar::where('status', 0)->get();
         $categorys = Category::where('status', 0)->get();
