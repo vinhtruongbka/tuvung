@@ -109,6 +109,10 @@ Route::group(['prefix' => '/admin'], function() {
 		'uses'=>'AdminController@getProfile',
 		'as'=>'admin.getProfile',
 		]);
+	Route::get('/slide', [
+		'uses'=>'AdminController@getSlide',
+		'as'=>'admin.getSlide',
+		]);
 	Route::get('/address', [
 		'uses'=>'AdminController@getAddress',
 		'as'=>'admin.getAddress',
@@ -155,6 +159,10 @@ Route::group(['prefix' => '/admin'], function() {
     Route::post('/update-admin', [
        	'uses'=>'AdminController@updateAdmin',
        	'as'=>'admin.updateAdmin',
+       ]);
+     Route::post('/update-slide', [
+       	'uses'=>'AdminController@updateSlide',
+       	'as'=>'admin.updateSlide',
        ]);
     Route::post('/update-password', [
        	'uses'=>'AdminController@updatePassword',

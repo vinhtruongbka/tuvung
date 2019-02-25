@@ -12,10 +12,12 @@ use App\Category;
 use App\Vocabulary;
 use App\Address;
 use App\Useronline;
+use App\Slide;
 
 class HomeController extends Controller
 {
     public function getIndex(Request $request){
+        $slide = Slide::first();
         $news = News::orderBy('id', 'desc')->paginate(20);
         $address = Address::first();
         $sidebars = Sidebar::where('status', 0)->get();
@@ -25,7 +27,7 @@ class HomeController extends Controller
         ->select('category.*')
         ->where('sidebar.title','menu')
         ->get();
-        return view('page.home',compact('news','sidebars','categorys','categorys_2','menus','address'));
+        return view('page.home',compact('news','sidebars','categorys','categorys_2','menus','address','slide'));
     }
 
     public function getDetail($slug){

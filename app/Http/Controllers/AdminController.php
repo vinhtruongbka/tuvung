@@ -14,6 +14,7 @@ use App\User;
 use App\Role;
 use Illuminate\Support\Facades\Auth;
 use App\Address;
+use App\Slide;
 
 class AdminController extends Controller
 {
@@ -53,6 +54,15 @@ class AdminController extends Controller
 			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
 				
 				return view('backend.page.profile');
+			} else {
+				return redirect()->intended('/admin/login');
+			}
+		}
+	public function getSlide(Request $request)
+		{	
+			if (Auth::check() && $request->user()->authorizeRoles( 'admin')) {
+				$slide = Slide::first();
+				return view('backend.page.slide',compact('slide'));
 			} else {
 				return redirect()->intended('/admin/login');
 			}
@@ -244,6 +254,24 @@ class AdminController extends Controller
 					   		'images' => $images,
 					   	]);
 					return redirect()->route('admin.getProfile');
+				} else {
+				return redirect()->intended('/admin/login');
+			}
+			
+		}
+		public function updateSlide(Request $req)
+		{	
+			if (Auth::check() && $req->user()->authorizeRoles( 'admin')) {
+
+					$link =$req->images;
+					$base_url =  asset('')."uploads/";
+					$images = str_replace($base_url,"",$link);
+					 DB::table('slide')
+					    ->where('id', $req->id)
+					    ->update([
+					   		'images' => $images,
+					   	]);
+					return redirect()->route('admin.getSlide');
 				} else {
 				return redirect()->intended('/admin/login');
 			}

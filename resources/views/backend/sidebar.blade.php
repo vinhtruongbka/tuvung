@@ -49,7 +49,13 @@
                   </li>
                   <li><a href="{{ route('admin.getFile') }}"><i class="fa fa-folder-open"></i>Quản lý File <span class="fa fa-chevron-right"></span></a>
                   </li>
-                  <li><a href="{{ route('admin.getAddress') }}"><i class="fa fa-cog"></i>Cài đặt <span class="fa fa-chevron-right"></span></a>
+                  <li><a><i class="fa fa-cog"></i> Cài đặt <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{ route('admin.getAddress') }}">Địa chỉ</a></li>
+                      <li><a href="{{ route('admin.getSlide') }}">Banner</a></li>
+                    </ul>
+                  </li>
+
                   </li>
                 </ul>
               </div>
