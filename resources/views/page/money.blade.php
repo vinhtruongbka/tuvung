@@ -55,11 +55,11 @@
      <div class="title_itf">THÔNG TIN NGƯỜI DÙNG</div>  
      <table class="register">
 
-      <tbody><tr>
+      <tbody>{{-- <tr>
         <td><label for="seri" style="color:red;">Mã số giao dịch:</label></td>
         <td class="rg_font" style="color:red;"> 1653947</td>
         <td></td>
-    </tr>
+    </tr> --}}
     <tr>
         <td><label for="seri">Họ và tên người dùng: </label></td>
         <td class="rg_font"> {{Auth::user()->name}}</td>
