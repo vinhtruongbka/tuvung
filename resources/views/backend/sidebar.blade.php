@@ -51,7 +51,7 @@
                   </li>
                   <li><a><i class="fa fa-cog"></i> Cài đặt <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ route('admin.getAddress') }}">Địa chỉ</a></li>
+                      <li><a href="{{ route('admin.getAddress') }}">Thông tin</a></li>
                       <li><a href="{{ route('admin.getSlide') }}">Banner</a></li>
                     </ul>
                   </li>

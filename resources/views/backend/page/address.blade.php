@@ -26,12 +26,16 @@
     <div class="col-md-8 col-sm-10 col-xs-12 col-md-offset-2">
        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate action="{{ route('admin.updateAddress') }}" accept-charset="utf-8" enctype="multipart/form-data" method="post">
   <div class="form-group">
-    <label for="">Nội dung</label>
+    <label for="">Địa chỉ</label>
       <textarea name="desc" id="desc">{{ $address->content }}</textarea>
       <input type="hidden"  name="id" class="form-control" value="{{ $address->id}}">
   </div>
+  <div class="form-group">
+    <label for="">Thông tin nạp tiền</label>
+      <textarea name="rech" id="content">{{ $address->rech }}</textarea>
+  </div>
   <div class="form-group upload">
-    <label>Ảnh</label>
+    <label>Logo</label>
       <input type="hidden"  id="image_link_upload" name="images" class="form-control" value="{{ $address->images  }}">
     <img src="./uploads/{{ $address->images  }}" class="img-responsive modal_image" alt="Hình đại diện" data-toggle="modal" href='#modal-id' style="cursor: pointer;width: 150px">
 

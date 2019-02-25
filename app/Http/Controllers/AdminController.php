@@ -212,6 +212,7 @@ class AdminController extends Controller
 				    ->update([
 				        'content' => $req->desc,
 				        'images' => $images,
+				        'rech' => $req->rech,
 				   	]);
 				return redirect()->route('admin.getAddress');
 				} else {
