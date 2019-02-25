@@ -396,6 +396,7 @@ class AdminController extends Controller
 	        $category->slug = $req->slug;
 	        $category->idSidebar = $req->idSidebar;
 	        $category->status = $req->optradio;
+	        $category->aut = $req->aut;
 	        $category->save();
 
 	        return redirect()->route('adminCategory');
@@ -508,7 +509,8 @@ class AdminController extends Controller
 			    ->update([
 			   		'idCategory' => $req->idCategory,
 			   		'title' => $req->title,
-			   		'slug' => $req->slug
+			   		'slug' => $req->slug,
+			   		'aut'=>$req->aut
 			   	]);
 			return redirect()->route('admin.getCategoryList');
 		}

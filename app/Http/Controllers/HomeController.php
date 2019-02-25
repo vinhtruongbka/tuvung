@@ -45,8 +45,16 @@ class HomeController extends Controller
             return view('page.detail',compact('sidebars','categorys','categorys_2','desc','menus','desc2','address')); 
     }
 
-    public function getQuesetion($slug){
-         $address = Address::first();
+    public function getQuesetion($slug,Request $request){
+        $auth = Category::where('slug', $slug)->first();
+        if ($auth->aut == 1 && !Auth::check()) {
+            return redirect()->route('getLogin');
+        }
+
+        if ($auth->aut == 1 && !$request->user()->authorizeRoles(['employee', 'admin'])) {
+             return redirect()->route('home.getMoney');
+        }
+        $address = Address::first();
     	$menus = DB::table('category')->join('sidebar', 'category.idSidebar', '=', 'sidebar.id') 
         ->select('category.*')
         ->where('sidebar.title','menu')

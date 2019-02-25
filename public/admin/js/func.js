@@ -194,6 +194,13 @@ $(document).on('click', '.editCategory', function(e) {
             $('#editTileCategory').val(data.category.title);
             $('#editSlugCategory').val(data.category.slug);
             $('#editIdCategory').val(data.category.id);
+            console.log(data.category.aut);
+            if (data.category.aut == 0) {
+                $('#aut-0').prop('checked',true);
+            }
+            if (data.category.aut == 1) {
+                $('#aut-1').prop('checked',true);
+            }
              var html = '';
             for (var i in data.sidebar) {
 

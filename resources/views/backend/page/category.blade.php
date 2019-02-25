@@ -84,6 +84,17 @@
 		        	</label>
 		        </div>
   				<br/>
+  				<label >Phân quyền * :</label>
+		        <div>
+		        	<label class="radio-inline">
+		        		<input type="radio" value="0" name="aut" checked>Không cần đăng nhập
+		        	</label>
+		        	<label class="radio-inline">
+		        		<input type="radio" value="1"  name="aut">
+		        		Cần đăng nhập để xem
+		        	</label>
+		        </div>
+  				<br/>
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<button class="btn btn-primary" type="submit">Thêm mới</button>
 
@@ -121,6 +132,17 @@
 			           @endforeach --}}
 		        </select>
 		        <br/>
+		        <label >Phân quyền * :</label>
+		        <div>
+		        	<label class="radio-inline">
+		        		<input type="radio" value="0" name="aut" id="aut-0">Không cần đăng nhập
+		        	</label>
+		        	<label class="radio-inline">
+		        		<input type="radio" value="1"  name="aut" id="aut-1">
+		        		Cần đăng nhập để xem
+		        	</label>
+		        </div>
+  				<br/>
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<button class="btn btn-primary" type="submit">Cập nhật</button>
 
