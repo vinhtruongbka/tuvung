@@ -510,7 +510,6 @@ class AdminController extends Controller
 			   		'idCategory' => $req->idCategory,
 			   		'title' => $req->title,
 			   		'slug' => $req->slug,
-			   		'aut'=>$req->aut
 			   	]);
 			return redirect()->route('admin.getCategoryList');
 		}
@@ -523,7 +522,8 @@ class AdminController extends Controller
 			    ->update([
 			   		'title' => $req->title,
 			   		'slug' => $req->slug,
-			   		'idSidebar'=>$req->idSidebar
+			   		'idSidebar'=>$req->idSidebar,
+			   		'aut'=>$req->aut
 			   	]);
 			return redirect()->route('adminCategory');
 		}
